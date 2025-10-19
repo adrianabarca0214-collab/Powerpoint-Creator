@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Song PPT Generator (4:3)</title>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Load PptxGenJS library -->
+    <script src="https://unpkg.com/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+    
+    <!-- NEW: Load libraries for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        /* Apply Inter font globally for a modern look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .lyrics-textarea {
+            min-height: 120px; /* Set a reasonable minimum height for the auto-resizing box */
+            overflow-y: hidden; /* Hide scrollbar as it resizes */
+        }
+        
+        /* --- CRUCIAL: Parent Container for Centering --- */
+        .preview-slide {
+            /* Enforce strict 4:3 ratio */
+            aspect-ratio: 4 / 3; 
+            width: 100%;
+            /* CRUCIAL: Use Flexbox to center the child block (the editable div) */
+            display: flex;
+            align-items: center; /* Vertical Centering of the block */
+            justify-content: center; /* Horizontal Centering of the block */
+            position: relative;
+            padding: 0.5rem 0; /* WIDER TEXT BOX: Removed horizontal padding */
+        }
+        
+        /* --- Editable Div Styles (FIXED for centering) --- */
+        .preview-slide-editable {
+            /* Mimic pptxgen font style */
+            font-weight: 700;
+            line-height: 1.3;
+            border: none;
+            padding: 1rem;
+            color: inherit;
+            background-color: transparent;
+            outline: none; 
+            text-transform: uppercase; /* BUG FIX: Visually transform text to uppercase without moving cursor */
+            
+            /* --- FIX: Vertical & Horizontal Centering using Flexbox --- */
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            text-align: center; 
+            /* --- END FIX --- */
+
+            white-space: pre-wrap; 
+            word-break: break-word;
+            /* Ensure it fills the parent completely for a large clickable area */
+            width: 100%;
+            height: 100%; 
+            /* REMOVED FONT SIZE: Now controlled dynamically via inline styles */
+            transition: none;
+        }
+
+        /* Custom style for the color input box to ensure it looks good and is circular */
+        .color-input-box {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            border: none;
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            cursor: pointer;
+            border-radius: 9999px; 
+        }
+        .color-input-box::-webkit-color-swatch-wrapper { padding: 0; }
+        .color-input-box::-webkit-color-swatch { border: none; border-radius: 9999px; }
+        .color-input-box::-moz-color-swatch { border: none; border-radius: 9999px; }
+
+        .checkbox-container input:checked + .label-element {
+            /* Apply indigo background when checked */
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+        .checkbox-container input:checked ~ .dot { /* CORRECTED: Use general sibling selector ~ */
+            /* Move dot when checked */
+            transform: translateX(1.5rem);
+            background-color: #ffffff;
+        }
+        
+        /* Style for the button group in the preview (MOVED TO BOTTOM RIGHT) */
+        .preview-actions {
+            position: absolute;
+            bottom: 10px; /* Changed from top: 10px */
+            right: 10px; /* Changed from left: 10px */
+            top: auto;   
+            left: auto;  
+            display: flex;
+            gap: 6px;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+        .group:hover .preview-actions {
+            opacity: 1; /* Show on hover */
+        }
+        
+        /* Style for selected slides */
+        .slide-selected {
+            border: 4px solid #4f46e5; /* Indigo highlight */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 0 4px #4f46e5 !important;
+        }
+        
+        /* --- NEW & IMPROVED: Drag and drop styles --- */
+        /* NEW: Clickable area for the drag handle in the top-left corner */
+        .drag-handle-area {
+            cursor: grab;
+            position: absolute;
+            top: 8px; /* Position from top */
+            left: 8px; /* Position from left */
+            width: 40px; /* Clickable width */
+            height: 40px; /* Clickable height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            border-radius: 8px; /* Make it a rounded square */
+            transition: background-color 0.3s;
+        }
+
+        .group:hover .drag-handle-area {
+            background-color: rgba(0, 0, 0, 0.2); /* Show a background on hover */
+        }
+
+        /* The icon itself */
+        .drag-handle-icon {
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none; /* The area is draggable, not the icon itself */
+            color: white;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5));
+        }
+        .group:hover .drag-handle-icon {
+            opacity: 1;
+        }
+        
+        /* When dragging, change cursor on the body and handle */
+        body.is-dragging { cursor: grabbing; }
+        .drag-handle-area:active { cursor: grabbing; }
+
+        /* Style for the item being dragged: "LIFTED" effect */
+        .dragging {
+            opacity: 0.4; /* This creates the "ghost" placeholder effect */
+            border-style: dashed !important;
+        }
+        
+        /* NEW: Style for other selected items during a drag */
+        .part-of-drag {
+            opacity: 0.6;
+            border: 4px solid #818cf8; /* Lighter indigo */
+        }
+        
+        /* We style the .exportable-slide differently when its direct child is being dragged */
+        body.is-dragging .exportable-slide:hover {
+             transform: scale(1.02);
+        }
+        /* The drop indicator is a large, clear zone */
+        .drop-indicator {
+            height: 0px;
+            width: 100%;
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            opacity: 0;
+            margin: 0;
+        }
+        .drop-indicator.visible {
+            opacity: 1;
+            height: 40px; /* Expands to a large visible gap */
+            margin: 8px 0;
+            border-radius: 8px;
+            background-image: linear-gradient(45deg, #4f46e5, #818cf8);
+            animation: pulse-bg 2s infinite;
+            background-size: 200% 200%;
+        }
+        /* Text inside the expanded drop zone */
+        .drop-indicator.visible::before {
+            content: 'Drop Here';
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        @keyframes pulse-bg {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.25.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 pb-20"> <!-- Added pb-20 for fixed bar spacing -->
+
+    <div id="root"></div>
+
+    <!-- The React application is now loaded from a separate TSX file -->
+    <script type="module" src="index.tsx"></script>
+</body>
+</html>
