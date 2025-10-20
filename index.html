@@ -11,10 +11,6 @@
     <!-- Load PptxGenJS library -->
     <script src="https://unpkg.com/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
     
-    <!-- NEW: Load libraries for PDF export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
     <style>
         /* Apply Inter font globally for a modern look */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
@@ -26,47 +22,6 @@
             overflow-y: hidden; /* Hide scrollbar as it resizes */
         }
         
-        /* --- CRUCIAL: Parent Container for Centering --- */
-        .preview-slide {
-            /* Enforce strict 4:3 ratio */
-            aspect-ratio: 4 / 3; 
-            width: 100%;
-            /* CRUCIAL: Use Flexbox to center the child block (the editable div) */
-            display: flex;
-            align-items: center; /* Vertical Centering of the block */
-            justify-content: center; /* Horizontal Centering of the block */
-            position: relative;
-            padding: 0.5rem 0; /* WIDER TEXT BOX: Removed horizontal padding */
-        }
-        
-        /* --- Editable Div Styles (FIXED for centering) --- */
-        .preview-slide-editable {
-            /* Mimic pptxgen font style */
-            font-weight: 700;
-            line-height: 1.3;
-            border: none;
-            padding: 1rem;
-            color: inherit;
-            background-color: transparent;
-            outline: none; 
-            text-transform: uppercase; /* BUG FIX: Visually transform text to uppercase without moving cursor */
-            
-            /* --- FIX: Vertical & Horizontal Centering using Flexbox --- */
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            text-align: center; 
-            /* --- END FIX --- */
-
-            white-space: pre-wrap; 
-            word-break: break-word;
-            /* Ensure it fills the parent completely for a large clickable area */
-            width: 100%;
-            height: 100%; 
-            /* REMOVED FONT SIZE: Now controlled dynamically via inline styles */
-            transition: none;
-        }
-
         /* Custom style for the color input box to ensure it looks good and is circular */
         .color-input-box {
             appearance: none;
@@ -84,125 +39,153 @@
         .color-input-box::-moz-color-swatch { border: none; border-radius: 9999px; }
 
         .checkbox-container input:checked + .label-element {
-            /* Apply indigo background when checked */
             background-color: #4f46e5;
             border-color: #4f46e5;
         }
-        .checkbox-container input:checked ~ .dot { /* CORRECTED: Use general sibling selector ~ */
-            /* Move dot when checked */
+        .checkbox-container input:checked ~ .dot {
             transform: translateX(1.5rem);
             background-color: #ffffff;
         }
-        
-        /* Style for the button group in the preview (MOVED TO BOTTOM RIGHT) */
-        .preview-actions {
-            position: absolute;
-            bottom: 10px; /* Changed from top: 10px */
-            right: 10px; /* Changed from left: 10px */
-            top: auto;   
-            left: auto;  
+
+        /* --- Final Preview Modal Styles --- */
+        .preview-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(17, 24, 39, 0.8); /* bg-gray-900/80 */
+            backdrop-filter: blur(4px);
+            z-index: 50;
             display: flex;
-            gap: 6px;
-            opacity: 0; /* Hidden by default */
-            transition: opacity 0.3s;
-            z-index: 10;
+            padding: 1rem;
         }
-        .group:hover .preview-actions {
-            opacity: 1; /* Show on hover */
-        }
-        
-        /* Style for selected slides */
-        .slide-selected {
-            border: 4px solid #4f46e5; /* Indigo highlight */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 0 4px #4f46e5 !important;
-        }
-        
-        /* --- NEW & IMPROVED: Drag and drop styles --- */
-        /* NEW: Clickable area for the drag handle in the top-left corner */
-        .drag-handle-area {
-            cursor: grab;
-            position: absolute;
-            top: 8px; /* Position from top */
-            left: 8px; /* Position from left */
-            width: 40px; /* Clickable width */
-            height: 40px; /* Clickable height */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            border-radius: 8px; /* Make it a rounded square */
-            transition: background-color 0.3s;
-        }
-
-        .group:hover .drag-handle-area {
-            background-color: rgba(0, 0, 0, 0.2); /* Show a background on hover */
-        }
-
-        /* The icon itself */
-        .drag-handle-icon {
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none; /* The area is draggable, not the icon itself */
-            color: white;
-            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5));
-        }
-        .group:hover .drag-handle-icon {
-            opacity: 1;
-        }
-        
-        /* When dragging, change cursor on the body and handle */
-        body.is-dragging { cursor: grabbing; }
-        .drag-handle-area:active { cursor: grabbing; }
-
-        /* Style for the item being dragged: "LIFTED" effect */
-        .dragging {
-            opacity: 0.4; /* This creates the "ghost" placeholder effect */
-            border-style: dashed !important;
-        }
-        
-        /* NEW: Style for other selected items during a drag */
-        .part-of-drag {
-            opacity: 0.6;
-            border: 4px solid #818cf8; /* Lighter indigo */
-        }
-        
-        /* We style the .exportable-slide differently when its direct child is being dragged */
-        body.is-dragging .exportable-slide:hover {
-             transform: scale(1.02);
-        }
-        /* The drop indicator is a large, clear zone */
-        .drop-indicator {
-            height: 0px;
+        .preview-modal-content {
+            background-color: #f9fafb; /* bg-gray-50 */
+            color: #111827; /* text-gray-900 */
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
             width: 100%;
-            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-            opacity: 0;
-            margin: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
-        .drop-indicator.visible {
-            opacity: 1;
-            height: 40px; /* Expands to a large visible gap */
-            margin: 8px 0;
-            border-radius: 8px;
-            background-image: linear-gradient(45deg, #4f46e5, #818cf8);
-            animation: pulse-bg 2s infinite;
-            background-size: 200% 200%;
+        .dark .preview-modal-content {
+            background-color: #1f2937; /* dark:bg-gray-800 */
+            color: #f9fafb; /* dark:text-gray-50 */
         }
-        /* Text inside the expanded drop zone */
-        .drop-indicator.visible::before {
-            content: 'Drop Here';
-            color: white;
+
+        .preview-modal-layout {
+            flex-grow: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .thumbnail-sidebar {
+            width: 240px;
+            flex-shrink: 0;
+            background-color: #e5e7eb; /* bg-gray-200 */
+            overflow-y: auto;
+            padding: 0.5rem;
+            border-right: 1px solid #d1d5db; /* border-gray-300 */
+        }
+        .dark .thumbnail-sidebar {
+            background-color: #374151; /* dark:bg-gray-700 */
+            border-right: 1px solid #4b5563; /* dark:border-gray-600 */
+        }
+
+        .thumbnail-item {
+            aspect-ratio: 4 / 3;
+            width: 100%;
+            border: 2px solid transparent;
+            border-radius: 0.375rem; /* rounded-md */
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            background-color: white;
+            padding: 0.25rem;
+            position: relative;
+        }
+        .thumbnail-item:hover {
+            border-color: #a5b4fc; /* border-indigo-300 */
+        }
+        .thumbnail-item.active {
+            border-color: #4f46e5; /* border-indigo-600 */
+            box-shadow: 0 0 0 2px #4f46e5;
+        }
+        .dark .thumbnail-item {
+            background-color: #111827; /* dark:bg-gray-900 */
+        }
+        .dark .thumbnail-item:hover {
+            border-color: #6366f1; /* dark:border-indigo-500 */
+        }
+        .dark .thumbnail-item.active {
+            border-color: #818cf8; /* dark:border-indigo-400 */
+            box-shadow: 0 0 0 2px #818cf8;
+        }
+        
+        .thumbnail-index {
+            position: absolute;
+            top: 2px;
+            left: 4px;
+            font-size: 0.625rem; /* text-xs */
             font-weight: bold;
-            font-size: 14px;
+            color: #6b7280; /* text-gray-500 */
+        }
+        .dark .thumbnail-index {
+            color: #9ca3af; /* dark:text-gray-400 */
+        }
+        .thumbnail-content {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-size: 5px; /* Tiny font for thumbnail representation */
+            text-align: center;
+            line-height: 1.2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            word-break: break-word;
+        }
+
+
+        .main-slide-viewer {
+            flex-grow: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100%;
+            padding: 2rem;
+            background-color: #f3f4f6; /* bg-gray-100 */
+            overflow: auto;
+        }
+        .dark .main-slide-viewer {
+            background-color: #111827; /* dark:bg-gray-900 */
         }
 
-        @keyframes pulse-bg {
-            0%   { background-position: 0% 50%; }
-            50%  { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .main-slide-container {
+            width: 100%;
+            max-width: 100vh; /* Limit width based on viewport height to maintain aspect ratio */
+            aspect-ratio: 4 / 3;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            border-radius: 0.25rem; /* rounded-sm */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .main-slide-text-wrapper {
+             width: 100%;
+             height: 5in; /* Corresponds to h: 5 in pptxgen */
+             padding: 0.25in;
+             display: flex;
+             align-items: center; /* Default to middle */
+             justify-content: center;
+             text-align: center;
+             line-height: 1.2;
+             overflow: hidden;
+        }
+        
+        .preview-text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
         }
 
     </style>
@@ -221,7 +204,6 @@
 
     <div id="root"></div>
 
-    <!-- The React application is now loaded from a separate TSX file -->
     <script type="module" src="index.tsx"></script>
 </body>
 </html>

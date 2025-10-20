@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom/client';
 
 // TypeScript declarations for libraries loaded from script tags
 declare var PptxGenJS: any;
-declare var jspdf: any;
-declare var html2canvas: any;
 
 // --- GLOBAL CONSTANTS AND IONS ---
         
@@ -23,6 +21,7 @@ const Plus = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" widt
 const Minus = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" x2="19" y1="12" y2="12"/></svg>);
 const ArrowUp = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>);
 const ArrowDown = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>);
+const ArrowLeft = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>);
 const Trash2 = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>);
 const Copy = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="13" height="13" x="9" y="9" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>);
 const File = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>);
@@ -39,9 +38,12 @@ const Undo2 = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" wid
 const Redo2 = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a8.5 8.5 0 1 0 0 17H13"/></svg>);
 const AlertTriangle = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>);
 const Menu = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>);
-const FileDown = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M12 18v-6"/><path d="m15 15-3 3-3-3"/></svg>);
 const BookOpen = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>);
 const Search = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>);
+const ArrowRight = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>);
+const AlignVerticalJustifyStart = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="6" x="5" y="6" rx="2"/><rect width="10" height="6" x="7" y="12" rx="2"/><path d="M2 2v2"/><path d="M22 2v2"/><path d="M2 20v2"/><path d="M22 20v2"/></svg>);
+const AlignVerticalJustifyCenter = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="6" x="5" y="2" rx="2"/><rect width="10" height="6" x="7" y="16" rx="2"/><path d="M2 12h20"/></svg>);
+const AlignVerticalJustifyEnd = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="6" x="5" y="12" rx="2"/><rect width="10" height="6" x="7" y="6" rx="2"/><path d="M2 2v2"/><path d="M22 2v2"/><path d="M2 20v2"/><path d="M22 20v2"/></svg>);
 
 
 // Default colors
@@ -92,8 +94,19 @@ type SongWithChunks = typeof initialSong & { chunks?: SongChunk[] };
 type SelectedChunk = { songId: number; chunkIndex: number };
 type Feedback = { type: 'success' | 'error' | 'info'; message: string };
 type LibrarySong = { title: string; lyrics: string };
-// FIX: Defined a specific type for conflict resolution to ensure type safety.
-// This resolves errors where properties were being accessed on an 'unknown' type.
+
+type LyricVAlign = 'top' | 'middle' | 'bottom';
+
+type AppSettings = {
+    textColor: string;
+    backgroundColor: string;
+    theme: string;
+    fontSizeInput: string | number;
+    fontFamily: string;
+    lyricVAlign: LyricVAlign;
+    hasTextShadow: boolean;
+};
+
 type ConflictResolution = {
     action: 'update' | 'keep' | 'save_as_new' | 'cancel' | 'dont_save' | 'save_anyway';
     newTitle?: string;
@@ -102,8 +115,6 @@ type ConflictResolution = {
 
 // --- Core Logic Functions ---
 
-// BUG FIX: Improved font size validation to clamp values instead of resetting.
-// This provides more intuitive feedback to the user.
 const validateAndSetFontSize = (sizeInput: string | number): number => {
     const size = parseInt(String(sizeInput), 10);
     if (isNaN(size)) return DEFAULT_FONT_SIZE;
@@ -137,11 +148,13 @@ const generateChunksForSongs = (songsToProcess: SongWithChunks[]): SongWithChunk
             }
         }
 
+        const applyTransform = (text: string) => text.toUpperCase();
+
         const newChunks: SongChunk[] = [
-            { type: 'title', text: song.title.toUpperCase() },
+            { type: 'title', text: applyTransform(song.title) },
             ...processedChunks.map(chunk => ({
                 type: 'lyric' as 'lyric',
-                text: chunk.text.toUpperCase(),
+                text: applyTransform(chunk.text),
             })),
         ];
 
@@ -151,7 +164,7 @@ const generateChunksForSongs = (songsToProcess: SongWithChunks[]): SongWithChunk
 
 
 // --- POWERPOINT GENERATION FUNCTION (FOR DOWNLOAD) ---
-const downloadPPTX = (songs: SongWithChunks[], textColor: string, backgroundColor: string, finalFontSize: number, finalFontFamily: string, includeSlideNumbers: boolean, customFilename: string): string => {
+const downloadPPTX = (songs: SongWithChunks[], settings: AppSettings, finalFontSize: number, customFilename: string): string => {
     if (typeof PptxGenJS === 'undefined') {
         throw new Error("PowerPoint generation library (PptxGenJS) is not loaded.");
     }
@@ -159,30 +172,23 @@ const downloadPPTX = (songs: SongWithChunks[], textColor: string, backgroundColo
     let pptx = new PptxGenJS();
     pptx.layout = 'LAYOUT_4x3'; 
 
-    const pptxTextColor = textColor.replace('#', '');
-    const pptxBackgroundColor = backgroundColor.replace('#', '');
+    const pptxTextColor = settings.textColor.replace('#', '');
+    const pptxBackgroundColor = settings.backgroundColor.replace('#', '');
     
-    if (includeSlideNumbers) {
-        pptx.slideNumber = {
-            x: 0.5, 
-            y: '95%', 
-            color: pptxTextColor, 
-            fontFace: 'Arial',
-            fontSize: 14,
-        };
-    } else {
-        pptx.slideNumber = false; 
-    }
+    const shadowOptions = settings.hasTextShadow 
+        ? { shadow: { type: 'outer', color: '000000', blur: 2, offset: 2, angle: 45, opacity: 0.4 } }
+        : {};
 
     const lyricTextStyle = {
         align: 'center', 
-        valign: 'middle', 
-        fontFace: finalFontFamily, 
+        valign: settings.lyricVAlign, 
+        fontFace: settings.fontFamily, 
         fontSize: finalFontSize, 
         bold: true,
         color: pptxTextColor, 
         autoFit: false,
         breakLine: true,
+        ...shadowOptions
     };
     
     const titleTextStyle = {
@@ -193,14 +199,13 @@ const downloadPPTX = (songs: SongWithChunks[], textColor: string, backgroundColo
         fontSize: 68,
         bold: true,
         color: pptxTextColor, 
-        shadow: { type: 'outer', color: 'A0A0A0', blur: 5, offset: 3, angle: 45, opacity: 0.2 }, 
+        ...shadowOptions
     };
     
     const lyricBoxStyle = {
         x: 0, y: 1.25, w: '100%', h: 5,
     };
 
-    // NEW: Iterate over each song and its typed chunks to generate slides
     songs.forEach(song => {
         if (song.chunks) {
             song.chunks.forEach(chunk => {
@@ -216,7 +221,6 @@ const downloadPPTX = (songs: SongWithChunks[], textColor: string, backgroundColo
         }
     });
 
-    // Save the presentation with the custom filename
     pptx.writeFile({ fileName: customFilename });
     return customFilename;
 };
@@ -225,7 +229,9 @@ const downloadPPTX = (songs: SongWithChunks[], textColor: string, backgroundColo
 const GlobalCustomizationSettings = ({
     textColor, setTextColor, backgroundColor, setBackgroundColor, theme, setTheme,
     fontSizeInput, setFontSizeInput, downloadFileName, setDownloadFileName,
-    fontFamily, setFontFamily, includeSlideNumbers, setIncludeSlideNumbers, isLoading
+    fontFamily, setFontFamily, lyricVAlign, setLyricVAlign, 
+    hasTextShadow, setHasTextShadow,
+    isLoading
 }) => {
     
     const handleFontSizeBlur = () => {
@@ -280,30 +286,34 @@ const GlobalCustomizationSettings = ({
                         </div>
                     </div>
                 </div>
-                <div className="flex items-center justify-between pt-2">
-                        <span className="flex items-center text-sm font-medium text-gray-700 dark:text-gray-300">
-                            <Hash className="w-4 h-4 mr-2 text-indigo-500"/>
-                            Include Slide Numbers
-                        </span>
-                    <label htmlFor="slide-number-toggle" title="Toggle slide numbers on or off" className="flex items-center cursor-pointer checkbox-container">
-                        <div className="relative">
-                            <input 
-                                id="slide-number-toggle" 
-                                type="checkbox" 
-                                className="sr-only" 
-                                checked={includeSlideNumbers}
-                                onChange={(e) => setIncludeSlideNumbers(e.target.checked)}
+                <div>
+                    <label className="text-sm font-medium text-gray-600 dark:text-gray-300 block mb-2">Lyric Position</label>
+                    <div className="flex items-center space-x-2 rounded-lg bg-gray-200 dark:bg-gray-600 p-1">
+                        {(['top', 'middle', 'bottom'] as const).map((pos) => (
+                            <button
+                                key={pos}
+                                onClick={() => setLyricVAlign(pos)}
                                 disabled={isLoading}
-                            />
-                            <div className="block bg-gray-300 dark:bg-gray-600 w-14 h-8 rounded-full label-element transition duration-300 ease-in-out border-2 border-gray-300 dark:border-gray-500"></div>
-                            <div className="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition duration-300 ease-in-out shadow-inner"></div>
-                        </div>
-                    </label>
+                                title={`Align lyrics to the ${pos}`}
+                                className={`w-full py-2 px-3 rounded-md text-sm font-semibold transition-all duration-200 flex items-center justify-center space-x-2
+                                    ${lyricVAlign === pos
+                                        ? 'bg-white dark:bg-indigo-600 text-indigo-700 dark:text-white shadow-md'
+                                        : 'text-gray-500 dark:text-gray-300 hover:bg-white/50 dark:hover:bg-gray-500/50'
+                                    }
+                                `}
+                            >
+                                {pos === 'top' && <AlignVerticalJustifyStart className="w-5 h-5" />}
+                                {pos === 'middle' && <AlignVerticalJustifyCenter className="w-5 h-5" />}
+                                {pos === 'bottom' && <AlignVerticalJustifyEnd className="w-5 h-5" />}
+                                <span className="capitalize">{pos}</span>
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
             
             <div className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600 shadow-inner space-y-4">
-                <h3 className="text-base font-bold text-gray-700 dark:text-gray-200">Colors & Contrast</h3>
+                <h3 className="text-base font-bold text-gray-700 dark:text-gray-200">Colors & Style</h3>
                 <div className="flex justify-between items-center space-x-4">
                     <div className="text-center w-1/2">
                         <label htmlFor="text-color" className="text-sm font-medium text-gray-600 dark:text-gray-300 block mb-1">Text Color</label>
@@ -354,6 +364,26 @@ const GlobalCustomizationSettings = ({
                         </div>
                     </label>
                 </div>
+                <div className="flex items-center justify-between pt-2">
+                    <span className="flex items-center text-sm font-medium text-gray-700 dark:text-gray-300">
+                        <Edit className="w-4 h-4 mr-2 text-indigo-500"/>
+                        Text Shadow
+                    </span>
+                    <label htmlFor="text-shadow-toggle" title="Toggle a subtle shadow on the text" className="flex items-center cursor-pointer checkbox-container">
+                        <div className="relative">
+                            <input 
+                                id="text-shadow-toggle" 
+                                type="checkbox" 
+                                className="sr-only" 
+                                checked={hasTextShadow}
+                                onChange={(e) => setHasTextShadow(e.target.checked)}
+                                disabled={isLoading}
+                            />
+                            <div className="block bg-gray-300 dark:bg-gray-600 w-14 h-8 rounded-full label-element transition duration-300 ease-in-out border-2 border-gray-300 dark:border-gray-500"></div>
+                            <div className="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition duration-300 ease-in-out shadow-inner"></div>
+                        </div>
+                    </label>
+                </div>
                 <div className="pt-2">
                     <label htmlFor="font-size-input" className="text-sm font-bold text-gray-700 dark:text-gray-200 block mb-2">
                         Custom Font Size (10pt - 100pt)
@@ -387,7 +417,6 @@ const OverwriteProjectModal = ({ isOpen, collidingFilename, onClose, onOverwrite
             setNewFilename(`${collidingFilename}_copy`);
             setError(null);
             
-            // ACCESSIBILITY: Focus trap logic
             const modalNode = modalRef.current;
             if (!modalNode) return;
 
@@ -499,7 +528,7 @@ const OverwriteProjectModal = ({ isOpen, collidingFilename, onClose, onOverwrite
     );
 };
 
-// --- NEW: Song Library Modal ---
+// --- Song Library Modal ---
 const SongLibraryModal = ({ isOpen, onClose, onAddSongs }) => {
     const [library, setLibrary] = useState<LibrarySong[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -516,7 +545,6 @@ const SongLibraryModal = ({ isOpen, onClose, onAddSongs }) => {
             } catch {
                 setLibrary([]);
             }
-             // ACCESSIBILITY: Focus trap logic
             const modalNode = modalRef.current;
             if (!modalNode) return;
 
@@ -630,31 +658,250 @@ const SongLibraryModal = ({ isOpen, onClose, onAddSongs }) => {
     );
 };
 
-// --- NEW: Auto-Resizing Textarea Component ---
-const AutoResizingTextarea: React.FC<React.TextareaHTMLAttributes<HTMLTextAreaElement>> = ({ value, ...props }) => {
+// --- NEW: Load Project Modal ---
+const LoadProjectModal = ({ isOpen, onClose, projects, onLoad, onClearAll }) => {
+    const modalRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (isOpen) {
+            const modalNode = modalRef.current;
+            if (!modalNode) return;
+
+            const focusableElements = modalNode.querySelectorAll<HTMLElement>(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            firstElement?.focus();
+
+            const handleKeyDown = (e: KeyboardEvent) => {
+                if (e.key !== 'Tab') return;
+                if (e.shiftKey) {
+                    if (document.activeElement === firstElement) {
+                        lastElement.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    if (document.activeElement === lastElement) {
+                        firstElement.focus();
+                        e.preventDefault();
+                    }
+                }
+            };
+
+            document.addEventListener('keydown', handleKeyDown);
+            return () => document.removeEventListener('keydown', handleKeyDown);
+        }
+    }, [isOpen]);
+
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div ref={modalRef} className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-lg h-[60vh] flex flex-col border border-gray-300 dark:border-gray-600">
+                <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">Load Project</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Select a project to load into the editor.</p>
+                </div>
+
+                <div className="flex-1 overflow-y-auto">
+                    {projects.length > 0 ? (
+                        <ul>
+                            {projects.map(projectName => (
+                                <li key={projectName} className="border-b border-gray-200 dark:border-gray-700">
+                                    <button
+                                        onClick={() => onLoad(projectName)}
+                                        className="w-full flex items-center p-4 space-x-4 cursor-pointer hover:bg-indigo-50 dark:hover:bg-indigo-900/50 transition text-left"
+                                    >
+                                        <FolderUp className="w-5 h-5 text-indigo-500 flex-shrink-0" />
+                                        <span className="font-medium text-gray-800 dark:text-gray-200">{projectName}</span>
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p className="p-8 text-center text-gray-500 dark:text-gray-400">
+                            No saved projects found.
+                        </p>
+                    )}
+                </div>
+
+                <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 flex justify-between items-center rounded-b-xl">
+                     <button
+                        onClick={onClearAll}
+                        disabled={projects.length === 0}
+                        title="Delete all saved projects from your browser. This cannot be undone."
+                        className="py-2 px-4 rounded-lg font-bold text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center space-x-2"
+                    >
+                        <Trash2 className="w-4 h-4"/>
+                        <span>Clear All</span>
+                    </button>
+                    <button onClick={onClose} className="py-2 px-4 rounded-lg font-bold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// --- Final Preview Modal ---
+const FinalPreviewModal = ({ isOpen, onClose, onConfirmDownload, slides, settings, isLoading }) => {
+    const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+    const activeThumbnailRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (isOpen) {
+            setCurrentSlideIndex(0); // Reset to first slide on open
+        }
+    }, [isOpen]);
+    
+    useEffect(() => {
+        // Scroll the active thumbnail into view
+        activeThumbnailRef.current?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+        });
+    }, [currentSlideIndex]);
+
+    if (!isOpen) return null;
+
+    const currentSlide = slides[currentSlideIndex];
+    
+    const vAlignClass = {
+        top: 'items-start',
+        middle: 'items-center',
+        bottom: 'items-end'
+    }[settings.lyricVAlign];
+
+    const handleNextSlide = () => {
+        setCurrentSlideIndex(prev => Math.min(prev + 1, slides.length - 1));
+    };
+    
+    const handlePrevSlide = () => {
+        setCurrentSlideIndex(prev => Math.max(prev - 1, 0));
+    };
+
+    const textPreviewClasses = [
+        settings.hasTextShadow ? 'preview-text-shadow' : '',
+        'uppercase',
+    ].join(' ');
+
+    return (
+        <div className="preview-modal-overlay" role="dialog" aria-modal="true">
+            <div className="preview-modal-content">
+                <header className="flex-shrink-0 p-3 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
+                    <h2 className="text-lg font-bold">Final Presentation Preview</h2>
+                    <div className="flex items-center space-x-4">
+                        <button onClick={onClose} title="Back to Edit" className="py-2 px-4 rounded-lg font-bold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-600 transition flex items-center space-x-2">
+                             <ArrowLeft className="w-5 h-5"/>
+                             <span>Back to Edit</span>
+                        </button>
+                        <button
+                            onClick={onConfirmDownload}
+                            disabled={isLoading}
+                            className="py-2 px-4 rounded-lg font-bold text-white bg-green-600 hover:bg-green-700 disabled:bg-green-300 dark:disabled:bg-green-800 transition shadow-md shadow-green-500/50 flex items-center space-x-2"
+                        >
+                            {isLoading ? <Loader2 className="w-5 h-5 animate-spin"/> : <Download className="w-5 h-5"/>}
+                            <span>{isLoading ? 'Downloading...' : 'Download .pptx'}</span>
+                        </button>
+                    </div>
+                </header>
+
+                <div className="preview-modal-layout">
+                    <aside className="thumbnail-sidebar">
+                        {slides.map((slide, index) => (
+                            <div
+                                key={index}
+                                ref={index === currentSlideIndex ? activeThumbnailRef : null}
+                                className={`thumbnail-item ${index === currentSlideIndex ? 'active' : ''}`}
+                                onClick={() => setCurrentSlideIndex(index)}
+                                style={{ backgroundColor: settings.backgroundColor }}
+                            >
+                                <span className="thumbnail-index">{index + 1}</span>
+                                <div className="thumbnail-content uppercase" style={{ color: settings.textColor }}>
+                                    {slide.text}
+                                </div>
+                            </div>
+                        ))}
+                    </aside>
+
+                    <main className="main-slide-viewer">
+                        <div className="main-slide-container" style={{ backgroundColor: settings.backgroundColor }}>
+                            {currentSlide.type === 'title' ? (
+                                <div className="p-4 flex items-center justify-center h-full">
+                                    <h1 className={textPreviewClasses} style={{
+                                        color: settings.textColor,
+                                        fontFamily: 'Arial Black',
+                                        fontSize: '68px',
+                                        fontWeight: 'bold',
+                                        textAlign: 'center',
+                                    }}>
+                                        {currentSlide.text}
+                                    </h1>
+                                </div>
+                            ) : (
+                                <div className={`main-slide-text-wrapper ${vAlignClass}`}>
+                                    <p className={textPreviewClasses} style={{
+                                        color: settings.textColor,
+                                        fontFamily: settings.fontFamily,
+                                        fontSize: `${settings.fontSizeInput}pt`,
+                                        fontWeight: 'bold',
+                                        whiteSpace: 'pre-wrap',
+                                    }}>
+                                        {currentSlide.text}
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                    </main>
+                </div>
+                
+                <footer className="flex-shrink-0 p-2 flex justify-center items-center border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                    <div className="flex items-center space-x-4">
+                        <button onClick={handlePrevSlide} disabled={currentSlideIndex === 0} className="p-2 rounded-full disabled:opacity-30 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                            <ArrowLeft className="w-6 h-6"/>
+                        </button>
+                        <span className="font-mono text-sm">{currentSlideIndex + 1} / {slides.length}</span>
+                        <button onClick={handleNextSlide} disabled={currentSlideIndex === slides.length - 1} className="p-2 rounded-full disabled:opacity-30 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                            <ArrowRight className="w-6 h-6"/>
+                        </button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    );
+};
+
+
+// --- Auto-Resizing Textarea Component ---
+const AutoResizingTextarea: React.FC<React.TextareaHTMLAttributes<HTMLTextAreaElement> & { autoResize?: boolean }> = ({ value, autoResize = false, ...props }) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     useEffect(() => {
-        const textarea = textareaRef.current;
-        if (textarea) {
-            // Reset height to recalculate the correct scrollHeight, especially when deleting text
-            textarea.style.height = '0px'; 
-            const scrollHeight = textarea.scrollHeight;
-            textarea.style.height = `${scrollHeight}px`;
+        if (autoResize) {
+            const textarea = textareaRef.current;
+            if (textarea) {
+                textarea.style.height = '0px'; 
+                const scrollHeight = textarea.scrollHeight;
+                textarea.style.height = `${scrollHeight}px`;
+            }
         }
-    }, [value]); // Rerun this effect whenever the text value changes
+    }, [value, autoResize]); 
 
     return (
         <textarea
             ref={textareaRef}
             value={value}
-            rows={1} // Start with a single row, the effect will handle the rest
+            rows={autoResize ? 1 : undefined}
             {...props}
         />
     );
 };
 
-// --- NEW: String Similarity Helpers ---
+
+// --- String Similarity Helpers ---
 const normalizeText = (text: string) => {
     if (!text) return '';
     return text.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, ' ').trim();
@@ -686,7 +933,7 @@ const stringSimilarity = (str1: string, str2: string) => {
     return (2.0 * intersectionSize) / (s1.length + s2.length - 2);
 };
 
-// --- NEW: Conflict Resolution Modals ---
+// --- Conflict Resolution Modals ---
 const VersionConflictModal = ({ isOpen, conflict, onResolve }) => {
     const [newTitle, setNewTitle] = useState('');
     const [error, setError] = useState('');
@@ -757,20 +1004,22 @@ const SimilarityConflictModal = ({ isOpen, conflict, onResolve }) => {
 const App = () => {
     // Master state for the "saved" or "clean" song data
     const [songs, setSongs] = useState<SongWithChunks[]>([initialSong]); 
-    
-    // Preview-specific state for isolated editing
-    const [previewSongs, setPreviewSongs] = useState<SongWithChunks[] | null>(null);
-    
+        
     // UI State
     const [textColor, setTextColor] = useState(DEFAULT_TEXT_COLOR);
     const [backgroundColor, setBackgroundColor] = useState(DEFAULT_BG_COLOR);
     const [theme, setTheme] = useState('light');
-    const [includeSlideNumbers, setIncludeSlideNumbers] = useState(false);
     
     // Font and Size State
     const [fontSizeInput, setFontSizeInput] = useState<string | number>(DEFAULT_FONT_SIZE); 
     const [fontFamily, setFontFamily] = useState('Verdana'); 
     
+    // Vertical Alignment State
+    const [lyricVAlign, setLyricVAlign] = useState<LyricVAlign>('middle');
+
+    // New Text Style State
+    const [hasTextShadow, setHasTextShadow] = useState(false);
+
     // Filename state
     const [downloadFileName, setDownloadFileName] = useState('Worship_Set'); 
     
@@ -778,49 +1027,29 @@ const App = () => {
     const [pptxFontSize, setPptxFontSize] = useState(DEFAULT_FONT_SIZE);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    // BUG FIX: Renamed 'downloadFilename' to 'lastDownloadedFile' for clarity.
     const [lastDownloadedFile, setLastDownloadedFile] = useState<string | null>(null);
     const [feedback, setFeedback] = useState<Feedback | null>(null);
 
-    // Multi-slide selection and move mode
-    const [selectedChunks, setSelectedChunks] = useState<SelectedChunk[]>([]);
-    const [moveMode, setMoveMode] = useState('idle'); // 'idle' | 'selecting_target'
-    
-    // Undo/Redo History State
-    const [history, setHistory] = useState<SongWithChunks[][]>([]);
-    const [historyIndex, setHistoryIndex] = useState(-1);
-
-    // Zoom Level State
-    const [zoomLevel, setZoomLevel] = useState(1.0);
-    
     // Settings visibility state
     const [isSettingsExpanded, setIsSettingsExpanded] = useState(false);
-    const [isExportDropdownOpen, setIsExportDropdownOpen] = useState(false);
 
-    // Load Project Dropdown State
-    const [isLoadDropdownOpen, setIsLoadDropdownOpen] = useState(false);
+    // Load Project Modal State
+    const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
     const [savedProjects, setSavedProjects] = useState<string[]>([]);
-    const loadDropdownRef = useRef(null);
-    const exportDropdownRef = useRef(null);
     
     // Overwrite Modal State
     const [overwriteModal, setOverwriteModal] = useState<{ isOpen: boolean; filename: string | null }>({ isOpen: false, filename: null });
     
-    // Drag and Drop State
-    const [draggedItem, setDraggedItem] = useState<SelectedChunk | null>(null);
-    const [dragOverInfo, setDragOverInfo] = useState<{ songId: number; chunkIndex: number; position: 'before' | 'after' } | null>(null);
-
     // Library State
     const [isLibraryModalOpen, setIsLibraryModalOpen] = useState(false);
     const [versionConflict, setVersionConflict] = useState<any>(null);
     const [similarityConflict, setSimilarityConflict] = useState<any>(null);
-    // FIX: Updated the conflictResolver ref to use the strongly-typed ConflictResolution type.
     const conflictResolver = useRef<(resolution: ConflictResolution) => void | null>(null);
 
-    
-    // --- DERIVED STATE & MEMOIZED VALUES ---
-    const isInPreviewMode = !!previewSongs;
-    const isDirty = isInPreviewMode && history.length > 0 && historyIndex > -1 && JSON.stringify(previewSongs) !== JSON.stringify(history[0]);
+    // Preview Modal State
+    const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
+    const [slidesForPreview, setSlidesForPreview] = useState<SongChunk[]>([]);
+    const [songsForDownload, setSongsForDownload] = useState<SongWithChunks[]>([]);
 
     
     // --- Effects to Manage State Sync ---
@@ -849,21 +1078,6 @@ const App = () => {
     }, [fontSizeInput]);
 
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (loadDropdownRef.current && !loadDropdownRef.current.contains(event.target)) {
-                setIsLoadDropdownOpen(false);
-            }
-            if (exportDropdownRef.current && !exportDropdownRef.current.contains(event.target)) {
-                setIsExportDropdownOpen(false);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [loadDropdownRef, exportDropdownRef]);
-
-    useEffect(() => {
         if (lastDownloadedFile) {
             const timer = setTimeout(() => {
                 setLastDownloadedFile(null);
@@ -872,8 +1086,26 @@ const App = () => {
         }
     }, [lastDownloadedFile]);
 
-    // --- Song Management Handlers ---
+    useEffect(() => {
+        if (feedback) {
+            const timer = setTimeout(() => {
+                setFeedback(null);
+            }, 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [feedback]);
 
+    const applySettings = useCallback((settings: AppSettings) => {
+        setTextColor(settings.textColor);
+        setBackgroundColor(settings.backgroundColor);
+        setTheme(settings.theme);
+        setFontSizeInput(settings.fontSizeInput);
+        setFontFamily(settings.fontFamily);
+        setLyricVAlign(settings.lyricVAlign || 'middle');
+        setHasTextShadow(settings.hasTextShadow || false);
+    }, []);
+
+    // --- Song Management Handlers ---
     const handleAddSong = () => {
         setSongs(prevSongs => [
             ...prevSongs, 
@@ -914,55 +1146,41 @@ const App = () => {
     };
     
     // --- Project Save/Load Handlers ---
-    
     const saveProjectToFile = useCallback(async (filename: string) => {
         try {
             const allProjects = JSON.parse(localStorage.getItem('multiSongProjects') || '{}');
-            const songsToSave = previewSongs || songs;
             const projectData = {
-                songs: songsToSave,
-                textColor,
-                backgroundColor,
-                theme,
-                includeSlideNumbers,
-                fontSizeInput,
-                fontFamily,
+                songs: songs.map(({ chunks, ...rest }) => rest), // Always save without chunks
+                settings: {
+                    textColor,
+                    backgroundColor,
+                    theme,
+                    fontSizeInput,
+                    fontFamily,
+                    lyricVAlign,
+                    hasTextShadow,
+                }
             };
 
             allProjects[filename] = projectData;
             localStorage.setItem('multiSongProjects', JSON.stringify(allProjects));
             
-            // NEW: Update the song library with conflict resolution
-            await updateSongLibrary(songsToSave);
+            await updateSongLibrary(songs);
 
-            setDownloadFileName(filename); // Ensure UI is in sync with saved name
+            setDownloadFileName(filename);
             setFeedback({ type: 'success', message: `Project "${filename}" saved successfully!` });
-            setTimeout(() => setFeedback(null), 3000);
-
-            if (previewSongs) {
-                const currentPreviewState = JSON.parse(JSON.stringify(previewSongs));
-                setSongs(currentPreviewState);
-                if(history.length > 0) { // Only update history if it has been initialized
-                    setHistory([currentPreviewState]); // Reset history to this saved state
-                    setHistoryIndex(0);
-                }
-            }
         } catch (err) {
             if (err.message !== 'Conflict resolution cancelled by user.') {
                 console.error("Failed to save project:", err);
                 setFeedback({ type: 'error', message: 'Failed to save project.' });
-                setTimeout(() => setFeedback(null), 3000);
             }
         }
-    }, [previewSongs, songs, textColor, backgroundColor, theme, includeSlideNumbers, fontSizeInput, fontFamily, history.length]);
+    }, [songs, textColor, backgroundColor, theme, fontSizeInput, fontFamily, lyricVAlign, hasTextShadow]);
 
-    // --- NEW: Smart Library Update Logic ---
     const updateSongLibrary = useCallback(async (songsToUpdate: SongWithChunks[]) => {
         const SIMILARITY_THRESHOLD = 0.85;
         let library: LibrarySong[] = JSON.parse(localStorage.getItem('songLibrary') || '[]');
         
-        // FIX: Added a return type annotation to ensure this function returns a strongly-typed promise.
-        // This makes the 'await' result have the correct type, fixing downstream errors.
         const processConflict = (conflictPromise: Promise<any>): Promise<ConflictResolution> => {
             return new Promise((resolve) => {
                 conflictResolver.current = resolve;
@@ -977,7 +1195,6 @@ const App = () => {
             const normalizedNewTitle = normalizeText(newSong.title);
             const normalizedNewLyrics = normalizeText(newSong.lyrics);
             
-            // Pass 1: Check for version conflicts (same title)
             const existingVersion = library.find(libSong => normalizeText(libSong.title) === normalizedNewTitle);
             if (existingVersion && normalizeText(existingVersion.lyrics) !== normalizedNewLyrics) {
                 const resolution = await processConflict(new Promise((_, reject) => {
@@ -992,22 +1209,19 @@ const App = () => {
                 if (resolution.action === 'update') {
                     library = library.map(s => s.title === existingVersion.title ? newSong : s);
                 } else if (resolution.action === 'save_as_new') {
-                    // Check if the *new* new title conflicts
                     const titleExists = library.some(s => normalizeText(s.title) === normalizeText(resolution.newTitle));
                     if(titleExists) {
                          setFeedback({ type: 'error', message: `A song with the title "${resolution.newTitle}" already exists. Save cancelled.` });
-                         setTimeout(() => setFeedback(null), 4000);
                     } else {
                          library.push({ title: resolution.newTitle, lyrics: newSong.lyrics });
                     }
                 } else if (resolution.action === 'cancel') {
                     throw new Error('Conflict resolution cancelled by user.');
                 }
-                continue; // Move to next song
+                continue;
             }
-            if (existingVersion) continue; // Exact duplicate, skip.
+            if (existingVersion) continue;
 
-            // Pass 2: Check for similarity conflicts (different title, similar lyrics)
             const similarSong = library.find(libSong => stringSimilarity(libSong.lyrics, newSong.lyrics) > SIMILARITY_THRESHOLD);
             if (similarSong) {
                 const resolution = await processConflict(new Promise((_, reject) => {
@@ -1027,7 +1241,6 @@ const App = () => {
                 continue;
             }
 
-            // No conflicts, add to library
             library.push(newSong);
         }
 
@@ -1035,21 +1248,25 @@ const App = () => {
     }, []);
     
     const handleSaveProject = useCallback(async () => {
+        const hasContent = songs.some(s => s.title.trim() || s.lyrics.trim());
+
+        if (!hasContent) {
+            setFeedback({ type: 'error', message: "Your project is empty. Add a song before saving." });
+            return;
+        }
+
         const baseName = downloadFileName.trim() || 'Untitled_Project';
         const sanitizedFilename = baseName.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '');
 
         const allProjects = JSON.parse(localStorage.getItem('multiSongProjects') || '{}');
         
-        // Always save if there are changes
-        if (isDirty) {
-             await saveProjectToFile(sanitizedFilename);
-        } else if (allProjects[sanitizedFilename]) { // If not dirty, but name exists, ask to overwrite
+        if (allProjects[sanitizedFilename]) {
             setOverwriteModal({ isOpen: true, filename: sanitizedFilename });
         }
-        else { // Not dirty and name is new, just save.
+        else {
             await saveProjectToFile(sanitizedFilename);
         }
-    }, [downloadFileName, isDirty, saveProjectToFile]);
+    }, [downloadFileName, saveProjectToFile, songs]);
 
     const handleModalClose = () => {
         setOverwriteModal({ isOpen: false, filename: null });
@@ -1068,53 +1285,42 @@ const App = () => {
     };
     
     const handleLoadProject = (filenameToLoad: string) => {
-        if (isDirty && !window.confirm("Loading a project will overwrite any unsaved changes. Are you sure you want to continue?")) {
-            return;
-        }
         try {
             const allProjects = JSON.parse(localStorage.getItem('multiSongProjects') || '{}');
             const projectData = allProjects[filenameToLoad];
 
             if (projectData) {
                 const loadedSongs: SongWithChunks[] = (projectData.songs || [initialSong]).map(s => ({
-                    ...initialSong, // Start with defaults
+                    ...initialSong,
                     ...s,
                     id: s.id || nextId(),
                     isCollapsed: !!s.isCollapsed,
                 }));
                 
                 setSongs(loadedSongs);
-                setTextColor(projectData.textColor || DEFAULT_TEXT_COLOR);
-                setBackgroundColor(projectData.backgroundColor || DEFAULT_BG_COLOR);
-                setTheme(projectData.theme || 'light');
-                setIncludeSlideNumbers(projectData.includeSlideNumbers || false);
-                setFontSizeInput(projectData.fontSizeInput || DEFAULT_FONT_SIZE);
-                setFontFamily(projectData.fontFamily || 'Verdana');
+                if (projectData.settings) {
+                    applySettings(projectData.settings);
+                } else {
+                    // Legacy support for projects saved without settings object
+                    setTextColor(projectData.textColor || DEFAULT_TEXT_COLOR);
+                    setBackgroundColor(projectData.backgroundColor || DEFAULT_BG_COLOR);
+                    setTheme(projectData.theme || 'light');
+                    setFontSizeInput(projectData.fontSizeInput || DEFAULT_FONT_SIZE);
+                    setFontFamily(projectData.fontFamily || 'Verdana');
+                    setLyricVAlign(projectData.lyricVAlign || 'middle');
+                    setHasTextShadow(false); // Default for legacy
+                }
+
                 setDownloadFileName(filenameToLoad);
                 
-                const hasChunks = loadedSongs.some(s => s.chunks && s.chunks.length > 0);
-                if (hasChunks) {
-                    const loadedState = JSON.parse(JSON.stringify(loadedSongs));
-                    setPreviewSongs(loadedState);
-                    setHistory([loadedState]);
-                    setHistoryIndex(0);
-                } else {
-                    setPreviewSongs(null);
-                    setHistory([]);
-                    setHistoryIndex(-1);
-                }
-                
                 setFeedback({ type: 'success', message: `Project "${filenameToLoad}" loaded successfully!` });
-                setTimeout(() => setFeedback(null), 3000);
-                setIsLoadDropdownOpen(false);
+                setIsLoadModalOpen(false);
             } else {
                  setFeedback({ type: 'error', message: `Project "${filenameToLoad}" not found.` });
-                 setTimeout(() => setFeedback(null), 3000);
             }
         } catch (err) {
             console.error("Failed to load project:", err);
             setFeedback({ type: 'error', message: 'Failed to load project. The saved data might be corrupted.' });
-            setTimeout(() => setFeedback(null), 3000);
         }
     };
 
@@ -1127,495 +1333,107 @@ const App = () => {
         }
     };
 
-    const toggleLoadDropdown = () => {
-        if (!isLoadDropdownOpen) {
-            fetchSavedProjects(); // Refresh list on open
-        }
-        setIsLoadDropdownOpen(prev => !prev);
+    const handleOpenLoadModal = () => {
+        fetchSavedProjects();
+        setIsLoadModalOpen(true);
     };
 
     const handleClearAllProjects = () => {
-        if (window.confirm("Are you sure you want to delete ALL saved projects? This action cannot be undone.")) {
+        if (window.confirm("Are you sure you want to delete ALL saved projects AND your entire song library? This action cannot be undone.")) {
             localStorage.removeItem('multiSongProjects');
+            localStorage.removeItem('songLibrary');
             setSavedProjects([]);
-            setIsLoadDropdownOpen(false);
-            setFeedback({ type: 'info', message: 'All saved projects have been cleared.' });
-            setTimeout(() => setFeedback(null), 3000);
+            setIsLoadModalOpen(false);
+            setFeedback({ type: 'info', message: 'All saved projects and the song library have been cleared.' });
         }
     };
 
-    // --- Zoom Handlers ---
-    const handleZoomIn = useCallback(() => setZoomLevel(prev => Math.min(prev + 0.1, 2.0)), []);
-    const handleZoomOut = useCallback(() => setZoomLevel(prev => Math.max(prev - 0.1, 0.5)), []);
-    const handleResetZoom = useCallback(() => setZoomLevel(1.0), []);
-    
-    // --- PREVIEW-MODE EDITING & HISTORY HANDLERS ---
-    
-    // Central function to update preview state and manage history
-    const updatePreviewState = useCallback((newState: SongWithChunks[]) => {
-        const newStateCopy = JSON.parse(JSON.stringify(newState)); // Deep copy for history
-        const newHistory = history.slice(0, historyIndex + 1); // Truncate future
-        newHistory.push(newStateCopy);
-        
-        setHistory(newHistory);
-        setHistoryIndex(newHistory.length - 1);
-        setPreviewSongs(newStateCopy);
-    }, [history, historyIndex]);
-    
-    const handleChunkEdit = (songId: number, chunkIndex: number, newText: string) => {
-        let text = newText.toUpperCase();
-        const newState = previewSongs.map(song => {
-            if (song.id !== songId) return song;
-            const updatedChunks = [...song.chunks];
-            updatedChunks[chunkIndex] = { ...updatedChunks[chunkIndex], text: text };
-            return { ...song, chunks: updatedChunks };
-        });
-        updatePreviewState(newState);
-    };
-
-    const handleDuplicateChunk = (songId: number, chunkIndex: number) => {
-        const newState = previewSongs.map(song => {
-            if (song.id !== songId) return song;
-            const chunkToDuplicate = song.chunks[chunkIndex];
-            const newChunks = [
-                ...song.chunks.slice(0, chunkIndex + 1),
-                chunkToDuplicate,
-                ...song.chunks.slice(chunkIndex + 1)
-            ];
-            return { ...song, chunks: newChunks };
-        });
-        updatePreviewState(newState);
-    };
-
-    const handleDeleteChunk = (songId: number, chunkIndex: number) => {
-        const newState = previewSongs.map(song => {
-            if (song.id !== songId) return song;
-            if (song.chunks.length <= 1) return song; // Prevent deleting last slide of a song
-            const newChunks = song.chunks.filter((_, index) => index !== chunkIndex);
-            return { ...song, chunks: newChunks };
-        });
-        updatePreviewState(newState);
-    };
-
-    const handleInsertEmptySlide = (songId: number, insertIndex: number) => {
-        const newState = previewSongs.map(song => {
-            if (song.id !== songId) return song;
-            const newChunks = [
-                ...song.chunks.slice(0, insertIndex + 1),
-                { type: 'lyric' as 'lyric', text: 'NEW SLIDE - EDIT TEXT' },
-                ...song.chunks.slice(insertIndex + 1)
-            ];
-            return { ...song, chunks: newChunks };
-        });
-        updatePreviewState(newState);
-    };
-
-    // --- Drag and Drop Handlers ---
-    const handleDragStart = (e: React.DragEvent, songId: number, chunkIndex: number) => {
-        const isAlreadySelected = selectedChunks.some(s => s.songId === songId && s.chunkIndex === chunkIndex);
-        
-        let currentSelection = selectedChunks;
-        if (!isAlreadySelected) {
-            const newSelection = [{ songId, chunkIndex }];
-            setSelectedChunks(newSelection);
-            currentSelection = newSelection;
-        }
-
-        setDraggedItem({ songId, chunkIndex });
-        e.dataTransfer.effectAllowed = 'move';
-        document.body.classList.add('is-dragging');
-
-        // Create a custom, styled drag ghost for single or multiple items
-        const ghost = document.createElement('div');
-        ghost.style.position = 'absolute';
-        ghost.style.top = '-9999px';
-        ghost.style.padding = '8px 12px';
-        ghost.style.backgroundColor = '#4f46e5';
-        ghost.style.color = 'white';
-        ghost.style.borderRadius = '8px';
-        ghost.style.display = 'flex';
-        ghost.style.alignItems = 'center';
-        ghost.style.gap = '8px';
-        ghost.style.fontWeight = 'bold';
-        ghost.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
-        ghost.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="13" height="13" x="9" y="9" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> <span>Moving ${currentSelection.length} slide${currentSelection.length > 1 ? 's' : ''}</span>`;
-        
-        document.body.appendChild(ghost);
-        e.dataTransfer.setDragImage(ghost, 0, 0);
-
-        setTimeout(() => document.body.removeChild(ghost), 0);
-    };
-
-    const handleDragOver = (e: React.DragEvent, targetSongId: number, targetChunkIndex: number) => {
-        e.preventDefault();
-        if (!draggedItem) return;
-
-        const isTargetInSelection = selectedChunks.some(s => s.songId === targetSongId && s.chunkIndex === targetChunkIndex);
-        if (isTargetInSelection) {
-            setDragOverInfo(null);
+    const handleSaveSingleSongToLibrary = useCallback(async (songId: number) => {
+        const songToSave = songs.find(s => s.id === songId);
+        if (!songToSave || !songToSave.title.trim() || !songToSave.lyrics.trim()) {
+            setFeedback({ type: 'error', message: 'Song must have a title and lyrics to be saved.' });
             return;
         }
 
-        const rect = e.currentTarget.getBoundingClientRect();
-        const isAfter = e.clientY > rect.top + rect.height / 2;
-        setDragOverInfo({ songId: targetSongId, chunkIndex: targetChunkIndex, position: isAfter ? 'after' : 'before' });
-    };
-
-    const handleDrop = (e: React.DragEvent) => {
-        e.preventDefault();
-        if (selectedChunks.length === 0 || !dragOverInfo || !previewSongs) {
-            setDraggedItem(null);
-            setDragOverInfo(null);
-            return;
+        try {
+            await updateSongLibrary([songToSave]);
+            setFeedback({ type: 'success', message: `"${songToSave.title}" saved to library!` });
+        } catch (err) {
+            if (err.message !== 'Conflict resolution cancelled by user.') {
+                console.error("Failed to save song to library:", err);
+                setFeedback({ type: 'error', message: 'Failed to save song to library.' });
+            }
         }
+    }, [songs, updateSongLibrary]);
 
-        let chunksToMove: SongChunk[] = [];
-        let updatedSongs: SongWithChunks[] = JSON.parse(JSON.stringify(previewSongs));
-        const selectedIds = new Set(selectedChunks.map(s => `${s.songId}-${s.chunkIndex}`));
-
-        updatedSongs = updatedSongs.map(song => {
-            const newChunks: SongChunk[] = [];
-            song.chunks.forEach((chunk, index) => {
-                if (selectedIds.has(`${song.id}-${index}`)) {
-                    chunksToMove.push(chunk);
-                } else {
-                    newChunks.push(chunk);
-                }
-            });
-            return { ...song, chunks: newChunks };
-        });
-
-        const targetSongIndex = updatedSongs.findIndex(s => s.id === dragOverInfo.songId);
-        if (targetSongIndex === -1) return;
-
-        let targetSong = updatedSongs[targetSongIndex];
-        let insertionIndex = dragOverInfo.position === 'after' ? dragOverInfo.chunkIndex + 1 : dragOverInfo.chunkIndex;
-        
-        const removedBeforeInTargetSong = selectedChunks.filter(s => s.songId === dragOverInfo.songId && s.chunkIndex < dragOverInfo.chunkIndex).length;
-        insertionIndex -= removedBeforeInTargetSong;
-
-        let updatedTargetChunks = [
-            ...targetSong.chunks.slice(0, insertionIndex),
-            ...chunksToMove,
-            ...targetSong.chunks.slice(insertionIndex)
-        ];
-        updatedSongs[targetSongIndex] = { ...targetSong, chunks: updatedTargetChunks };
-        
-        updatedSongs = updatedSongs.filter(song => song.chunks.length > 0);
-
-        updatePreviewState(updatedSongs);
-        
-        setDraggedItem(null);
-        setDragOverInfo(null);
-        setSelectedChunks([]);
-    };
-
-    const handleDragEnd = () => {
-        setDraggedItem(null);
-        setDragOverInfo(null);
-        document.body.classList.remove('is-dragging');
-    };
-
-    // --- Bulk Actions (Selection & Move) ---
-    const toggleChunkSelection = (songId: number, chunkIndex: number) => {
-        if (moveMode === 'selecting_target') return;
-        const isSelected = selectedChunks.some(s => s.songId === songId && s.chunkIndex === chunkIndex);
-        if (isSelected) {
-            setSelectedChunks(prev => prev.filter(s => !(s.songId === songId && s.chunkIndex === chunkIndex)));
-        } else {
-            setSelectedChunks(prev => [...prev, { songId, chunkIndex }]);
-        }
-    };
-    
-    const clearSelection = useCallback(() => {
-        setSelectedChunks([]);
-        setMoveMode('idle');
-    }, []);
-    
-    const isChunkSelected = (songId: number, chunkIndex: number) => {
-        return selectedChunks.some(s => s.songId === songId && s.chunkIndex === chunkIndex);
-    };
-
-    const handleDuplicateSelectedChunks = useCallback(() => {
-        if (selectedChunks.length === 0 || !previewSongs) return;
-
-        const selectionsBySong = selectedChunks.reduce<Record<string, number[]>>((acc, { songId, chunkIndex }) => {
-            if (!acc[songId]) acc[songId] = [];
-            acc[songId].push(chunkIndex);
-            return acc;
-        }, {});
-
-        let updatedSongs = [...previewSongs];
-
-        Object.keys(selectionsBySong).forEach(songIdStr => {
-            const songId = parseInt(songIdStr, 10);
-            const songIndex = updatedSongs.findIndex(s => s.id === songId);
-            if (songIndex === -1) return;
-
-            const songToUpdate = { ...updatedSongs[songIndex] };
-            const selectedIndices = selectionsBySong[songId].sort((a, b) => a - b);
-            const chunksToDuplicate = selectedIndices.map(index => songToUpdate.chunks[index]);
-            const lastSelectedIndex = Math.max(...selectedIndices);
-            songToUpdate.chunks.splice(lastSelectedIndex + 1, 0, ...chunksToDuplicate);
-            updatedSongs[songIndex] = songToUpdate;
-        });
-
-        updatePreviewState(updatedSongs);
-        clearSelection();
-    }, [selectedChunks, previewSongs, updatePreviewState, clearSelection]);
-
-    const handleDeleteSelectedChunks = useCallback(() => {
-        if (selectedChunks.length === 0 || !previewSongs) return;
-        
-        if (!window.confirm(`Are you sure you want to delete ${selectedChunks.length} slide(s)? This action can be undone.`)) {
-            return;
-        }
-
-        const selectedIds = new Set(selectedChunks.map(s => `${s.songId}-${s.chunkIndex}`));
-
-        let updatedSongs = previewSongs
-            .map(song => {
-                const newChunks = song.chunks.filter((_, index) => !selectedIds.has(`${song.id}-${index}`));
-                return { ...song, chunks: newChunks };
-            })
-            .filter(song => song.chunks.length > 0);
-
-        updatePreviewState(updatedSongs);
-        clearSelection();
-    }, [selectedChunks, previewSongs, updatePreviewState, clearSelection]);
-    
-    const handleSelectAll = useCallback(() => {
-        if (!previewSongs) return;
-        const allChunks: SelectedChunk[] = [];
-        previewSongs.forEach(song => {
-            song.chunks.forEach((_, chunkIndex) => {
-                allChunks.push({ songId: song.id, chunkIndex });
-            });
-        });
-        setSelectedChunks(allChunks);
-    }, [previewSongs]);
-
-    const canUndo = historyIndex > 0;
-    const canRedo = historyIndex < history.length - 1;
-
-    const handleUndo = useCallback(() => {
-        if (canUndo) {
-            const newIndex = historyIndex - 1;
-            setHistoryIndex(newIndex);
-            setPreviewSongs(history[newIndex]);
-        }
-    }, [canUndo, historyIndex, history]);
-
-    const handleRedo = useCallback(() => {
-        if (canRedo) {
-            const newIndex = historyIndex + 1;
-            setHistoryIndex(newIndex);
-            setPreviewSongs(history[newIndex]);
-        }
-    }, [canRedo, historyIndex, history]);
-    
-    // NEW: Library Integration
     const handleAddSongsFromLibrary = (songsToAdd: LibrarySong[]) => {
         const newSongObjects = songsToAdd.map(libSong => ({
             ...initialSong,
-            id: nextId(), // Ensure unique ID
+            id: nextId(),
             title: libSong.title,
             lyrics: libSong.lyrics,
         }));
 
         setSongs(prevSongs => {
-            // If current list is just one empty song, replace it
             if (prevSongs.length === 1 && !prevSongs[0].title.trim() && !prevSongs[0].lyrics.trim()) {
                 return newSongObjects.length > 0 ? newSongObjects : prevSongs;
             }
-            // Otherwise, append
             return [...prevSongs, ...newSongObjects];
         });
         setIsLibraryModalOpen(false);
     };
 
     // --- UI Mode & Major Action Handlers ---
-    const handleEdit = async () => {
-        if (isDirty) {
-             await saveProjectToFile(downloadFileName); // Auto-save changes
-             setFeedback({ type: 'info', message: `Changes to "${downloadFileName}" were automatically saved.` });
-             setTimeout(() => setFeedback(null), 4000);
-        }
-        
-        // BUG FIX: Clear chunks from the master 'songs' state to ensure a clean return to the form
-        setSongs(prevSongs => prevSongs.map(song => {
-            const { chunks, ...rest } = song;
-            return rest;
-        }));
-
-        setLastDownloadedFile(null);
-        setError(null);
-        clearSelection();
-        setZoomLevel(1.0);
-        setPreviewSongs(null);
-        setHistory([]);
-        setHistoryIndex(-1);
-    };
-
-    const handleGenerate = useCallback(async () => {
+    const handlePreview = () => {
         const isValid = songs.every(s => s.title.trim() && s.lyrics.trim());
         if (!isValid) {
             setError("Please ensure all songs have a Title and Lyrics entered.");
             return;
         }
-        setIsLoading(true);
         setError(null);
         setLastDownloadedFile(null);
-        try {
-            const updatedSongs = generateChunksForSongs(songs);
-            
-            const totalSlideCount = updatedSongs.reduce((acc, s) => acc + (s.chunks ? s.chunks.length : 0), 0);
-
-            if (totalSlideCount === 0) {
-                 setError("Please enter valid lyrics in at least one song to generate slides.");
-            } else {
-                const initialState = JSON.parse(JSON.stringify(updatedSongs));
-                setSongs(initialState);
-                setPreviewSongs(initialState);
-                setHistory([initialState]);
-                setHistoryIndex(0);
-                setZoomLevel(1.0);
-                setIsSettingsExpanded(false); // Collapse settings on generate
-            }
-        } catch (err) {
-            console.error("Processing error:", err);
-            setError("An unexpected error occurred during lyric processing.");
-        } finally {
-            setIsLoading(false);
-        }
-    }, [songs]); 
-
-    const handleDownload = useCallback(async () => {
-        const songsToDownload = previewSongs || songs; // Use previewSongs if available
-        const hasChunks = songsToDownload.some(s => s.chunks && s.chunks.length > 0);
-        if (!hasChunks) return; 
-        
-        setIsLoading(true);
-        setError(null);
-        setLastDownloadedFile(null);
-        try {
-            const baseName = downloadFileName.trim() || 'Multi_Song_Presentation';
-            const sanitizedBaseName = baseName.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '');
-            const finalFilename = `${sanitizedBaseName}.pptx`;
-            
-            const generatedFilename = downloadPPTX(songsToDownload, textColor, backgroundColor, pptxFontSize, fontFamily, includeSlideNumbers, finalFilename);
-            setLastDownloadedFile(generatedFilename);
-
-            if (isDirty) {
-                await handleSaveProject(); // Save the project if downloading with changes
-            }
-        } catch (err) {
-            console.error("Download error:", err);
-            setError("An error occurred while creating the presentation file.");
-        } finally {
-            setIsLoading(false);
-        }
-    }, [previewSongs, songs, downloadFileName, textColor, backgroundColor, pptxFontSize, fontFamily, includeSlideNumbers, isDirty, handleSaveProject]);
     
-     // --- NEW EXPORT HANDLERS ---
-    const handleExportPDF = async () => {
-        if (!isInPreviewMode || !previewSongs) return;
-        setIsLoading(true);
-        setFeedback({ type: 'info', message: 'Generating PDF, this may take a moment...' });
-
-        const { jsPDF } = jspdf;
-        const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [800, 600] });
-
-        try {
-            const slideNodes = document.querySelectorAll('.exportable-slide');
-            for (let i = 0; i < slideNodes.length; i++) {
-                const node = slideNodes[i] as HTMLElement;
-                const canvas = await html2canvas(node, { scale: 2, backgroundColor: backgroundColor });
-                const imgData = canvas.toDataURL('image/jpeg', 0.9);
-                if (i > 0) pdf.addPage();
-                pdf.addImage(imgData, 'JPEG', 0, 0, 800, 600);
-            }
-
-            const baseName = downloadFileName.trim() || 'Presentation';
-            const sanitizedBaseName = baseName.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '');
-            pdf.save(`${sanitizedBaseName}.pdf`);
-            setFeedback({ type: 'success', message: 'PDF export successful!' });
-        } catch (err) {
-            console.error("PDF Export error:", err);
-            setError("An error occurred while creating the PDF file.");
-            setFeedback(null);
-        } finally {
-            setIsLoading(false);
-            setTimeout(() => setFeedback(null), 3000);
-            setIsExportDropdownOpen(false);
-        }
-    };
-
-    const handleExportTXT = () => {
-        if (!isInPreviewMode || !previewSongs) return;
-        
-        const textContent = previewSongs.map(song => {
-            const title = song.title.toUpperCase();
-            const lyrics = song.chunks.filter(c => c.type === 'lyric').map(c => c.text).join('\n\n');
-            return `${title}\n--------------------\n${lyrics}`;
-        }).join('\n\n\n');
-
-        const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        
-        const baseName = downloadFileName.trim() || 'Lyrics';
-        const sanitizedBaseName = baseName.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '');
-        a.download = `${sanitizedBaseName}_lyrics.txt`;
-        
-        a.href = url;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        setIsExportDropdownOpen(false);
-    };
-
-    const handleGenerateAndDownload = async () => {
-        const isValid = songs.every(s => s.title.trim() && s.lyrics.trim());
-        if (!isValid) {
-            setError("Please ensure all songs have a Title and Lyrics entered.");
+        const songsWithChunks = generateChunksForSongs(songs);
+        const allChunks = songsWithChunks.flatMap(s => s.chunks || []);
+    
+        if (allChunks.length === 0) {
+            setError("Please enter valid lyrics in at least one song to generate slides.");
             return;
         }
+    
+        setSlidesForPreview(allChunks);
+        setSongsForDownload(songsWithChunks);
+        setIsPreviewModalOpen(true);
+    };
+    
+    const handleConfirmDownload = async () => {
         setIsLoading(true);
-        setError(null);
-        setLastDownloadedFile(null);
         try {
-            const songsWithChunks = generateChunksForSongs(songs);
-            
-            const totalSlideCount = songsWithChunks.reduce((acc, s) => acc + (s.chunks ? s.chunks.length : 0), 0);
-            if (totalSlideCount === 0) {
-                 setError("Please enter valid lyrics to generate slides.");
-                 setIsLoading(false);
-                 return;
-            }
-
             const baseName = downloadFileName.trim() || 'Multi_Song_Presentation';
             const sanitizedBaseName = baseName.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '');
             const finalFilename = `${sanitizedBaseName}.pptx`;
-            
-            const generatedFilename = downloadPPTX(songsWithChunks, textColor, backgroundColor, pptxFontSize, fontFamily, includeSlideNumbers, finalFilename);
+    
+            const allSettings = {
+                textColor, backgroundColor, theme, fontSizeInput, fontFamily, lyricVAlign, hasTextShadow
+            };
+            const generatedFilename = downloadPPTX(songsForDownload, allSettings, pptxFontSize, finalFilename);
             setLastDownloadedFile(generatedFilename);
-
+    
         } catch (err) {
-            console.error("Generate & Download error:", err);
-            setError("An error occurred while creating the presentation file.");
+            console.error("Processing or Download error:", err);
+            setError("An unexpected error occurred during presentation generation.");
         } finally {
             setIsLoading(false);
+            setIsPreviewModalOpen(false);
         }
     };
-    
-    const totalSlideCount = isInPreviewMode && previewSongs ? previewSongs.reduce((acc, s) => acc + (s.chunks ? s.chunks.length : 0), 0) : 0;
     
     const customizationProps = {
         textColor, setTextColor, backgroundColor, setBackgroundColor, theme, setTheme,
         fontSizeInput, setFontSizeInput, downloadFileName, setDownloadFileName,
-        fontFamily, setFontFamily, includeSlideNumbers, setIncludeSlideNumbers, isLoading,
+        fontFamily, setFontFamily, lyricVAlign, setLyricVAlign, 
+        hasTextShadow, setHasTextShadow,
+        isLoading,
     };
 
     // --- RENDER FUNCTIONS ---
@@ -1665,6 +1483,14 @@ const App = () => {
                             </button>
                         )}
                         <button
+                            onClick={() => handleSaveSingleSongToLibrary(song.id)}
+                            disabled={!song.title.trim() || !song.lyrics.trim()}
+                            title="Save this song to library"
+                            className="p-2 rounded-full text-blue-500 hover:bg-blue-100 dark:hover:bg-blue-900/50 disabled:opacity-30 disabled:cursor-not-allowed transition"
+                        >
+                            <Save className="w-5 h-5" />
+                        </button>
+                        <button
                             onClick={() => handleRemoveSong(song.id)}
                             disabled={songs.length <= 1}
                             title="Remove Song"
@@ -1678,7 +1504,6 @@ const App = () => {
                 {!song.isCollapsed && (
                     <div className="px-5 pb-5 pt-0 border-t border-gray-200 dark:border-gray-600 space-y-4">
                         <div className="relative pt-4">
-                            {/* BUG FIX: Added label for accessibility */}
                             <label htmlFor={`song-title-${song.id}`} className="sr-only">Song Title</label>
                             <Music className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
                             <input
@@ -1693,7 +1518,6 @@ const App = () => {
                             />
                         </div>
                         <div className="relative">
-                             {/* BUG FIX: Added htmlFor for accessibility */}
                             <label htmlFor={`lyrics-textarea-${song.id}`} className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center mb-1">
                                 <FileText className="w-4 h-4 mr-1 text-gray-500 dark:text-gray-400"/>
                                 Full Lyrics
@@ -1705,6 +1529,7 @@ const App = () => {
                                 onChange={(e) => handleSongChange(song.id, 'lyrics', e.target.value)}
                                 disabled={isLoading}
                                 title={`Enter the lyrics for Song #${index + 1}`}
+                                autoResize={true}
                                 className="lyrics-textarea w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-base transition duration-150 shadow-sm dark:bg-gray-600 dark:border-gray-500 dark:text-white dark:placeholder-gray-400"
                             />
                         </div>
@@ -1714,381 +1539,148 @@ const App = () => {
         );
     };
 
-    const renderForm = () => (
+    return (
         <>
-            <div className="text-center mb-8">
-                <Music className={`w-10 h-10 mx-auto text-indigo-600 mb-3`} /> 
-                <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-                    Multi-Song Slide Generator
-                </h1>
-                <p className="mt-2 text-gray-500 dark:text-gray-400">
-                    Create a single presentation containing multiple songs, each with its own title slide.
-                </p>
-            </div>
-            
-            <div className="mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <h2 className="text-xl font-bold text-gray-700 dark:text-gray-200 mb-4">Project Management</h2>
-                <div className="flex flex-col sm:flex-row gap-4">
-                    <button
-                        onClick={handleSaveProject}
-                        disabled={isLoading}
-                        title="Save the current project state (songs, lyrics, and settings) to your browser's local storage"
-                        className="flex-1 py-3 px-4 rounded-xl text-blue-600 font-bold flex items-center justify-center space-x-2 transition duration-300 transform active:scale-95 shadow-md border-2 border-blue-500 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-500 dark:hover:bg-blue-900/40 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        <Save className="w-5 h-5"/>
-                        <span>Save Project</span>
-                    </button>
-                    <div className="relative flex-1" ref={loadDropdownRef}>
-                        <button
-                            onClick={toggleLoadDropdown}
-                            disabled={isLoading}
-                            title="Load a previously saved project from your browser"
-                            className="w-full py-3 px-4 rounded-xl text-gray-600 font-bold flex items-center justify-center space-x-2 transition duration-300 transform active:scale-95 shadow-md border-2 border-gray-400 hover:bg-gray-100 dark:text-gray-300 dark:border-gray-500 dark:hover:bg-gray-700/40 disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            <FolderUp className="w-5 h-5"/>
-                            <span>Load Project</span>
-                        </button>
-                        {isLoadDropdownOpen && (
-                            <div className="absolute bottom-full mb-2 w-full bg-white dark:bg-gray-700 rounded-lg shadow-2xl border border-gray-300 dark:border-gray-600 z-10 max-h-60 overflow-y-auto">
-                                {savedProjects.length > 0 ? (
-                                    <ul>
-                                        {savedProjects.map(projectName => (
-                                            <li key={projectName}>
-                                                <button 
-                                                    onClick={() => handleLoadProject(projectName)}
-                                                    title={`Load the project '${projectName}'`}
-                                                    className="w-full text-left px-4 py-2 hover:bg-indigo-50 dark:hover:bg-indigo-900/50 text-gray-700 dark:text-gray-200 transition"
-                                                >
-                                                    {projectName}
-                                                </button>
-                                            </li>
-                                        ))}
-                                        <li><hr className="border-gray-200 dark:border-gray-600 my-1" /></li>
-                                        <li>
-                                            <button 
-                                                onClick={handleClearAllProjects}
-                                                title="Delete all saved projects from your browser. This cannot be undone."
-                                                className="w-full text-left px-4 py-2 text-red-600 dark:text-red-400 font-semibold hover:bg-red-50 dark:hover:bg-red-900/50 transition"
-                                            >
-                                                <Trash2 className="w-4 h-4 inline mr-2"/>
-                                                Clear All Projects
-                                            </button>
-                                        </li>
-                                    </ul>
-                                ) : (
-                                    <p className="px-4 py-3 text-gray-500 dark:text-gray-400 text-center">No saved projects found.</p>
-                                )}
+            <div className={`min-h-screen flex flex-col items-center py-10 px-4 bg-gray-50 dark:bg-gray-900`}>
+                <div className={`w-full max-w-4xl bg-white dark:bg-gray-800 shadow-2xl rounded-xl p-8`}>
+                    
+                    <div className="mb-4 space-y-2">
+                        {error && (
+                            <div className="bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-500/50 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg flex items-center space-x-2">
+                                <XCircle className="w-5 h-5" />
+                                <p className="font-medium">{error}</p>
+                            </div>
+                        )}
+                        
+                        {lastDownloadedFile && (
+                            <div className="bg-green-100 dark:bg-green-900/30 border border-green-400 dark:border-green-500/50 text-green-700 dark:text-green-300 px-4 py-3 rounded-lg flex items-center justify-between space-x-2">
+                                <p className="font-medium">
+                                    Success! Presentation **"{lastDownloadedFile}"** is ready.
+                                </p>
+                                <Download className="w-5 h-5" />
                             </div>
                         )}
                     </div>
-                </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
-                    Your work is saved in your browser's local storage. It is not uploaded anywhere.
-                </p>
-            </div>
 
-            <div className="mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
-                 <h2 className="text-xl font-bold text-gray-700 dark:text-gray-200 mb-4">Global Customization</h2>
-                <GlobalCustomizationSettings {...customizationProps} />
-            </div>
-            <div className="mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-xl font-bold text-gray-700 dark:text-gray-200">Song List</h2>
-                    <button
-                        onClick={() => setIsLibraryModalOpen(true)}
-                        disabled={isLoading}
-                        title="Add songs from your saved library"
-                        className="py-2 px-4 rounded-lg text-indigo-600 font-bold flex items-center justify-center space-x-2 transition duration-300 transform active:scale-95 shadow-sm border border-indigo-500 hover:bg-indigo-50 dark:text-indigo-400 dark:border-indigo-500 dark:hover:bg-indigo-900/40 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        <BookOpen className="w-5 h-5"/>
-                        <span>Add from Library</span>
-                    </button>
-                </div>
-                <div className="space-y-8">
-                    {songs.map(renderSongCard)}
-                </div>
-                <button
-                    onClick={handleAddSong}
-                    disabled={isLoading}
-                    title="Add a new, empty song card to the list"
-                    className={`mt-6 w-full py-3 px-4 rounded-xl text-indigo-600 font-bold text-lg flex items-center justify-center space-x-2 transition duration-300 transform active:scale-95 shadow-md border-2 border-indigo-600 border-dashed hover:bg-indigo-50 dark:text-indigo-400 dark:border-indigo-500 dark:hover:bg-indigo-900/40
-                        ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:border-indigo-700'}`}
-                >
-                    <Plus className="w-6 h-6" />
-                    <span>Add Another Song</span>
-                </button>
-            </div>
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <button
-                    onClick={handleGenerateAndDownload}
-                    disabled={isLoading || songs.some(s => !s.title.trim() || !s.lyrics.trim())}
-                    title="Generate and immediately download the PPTX file without entering the preview mode"
-                    className={`w-full py-4 px-4 rounded-xl text-white font-bold text-lg flex items-center justify-center space-x-2 transition duration-300 transform active:scale-95 shadow-lg 
-                        ${isLoading || songs.some(s => !s.title.trim() || !s.lyrics.trim())
-                            ? 'bg-green-300 dark:bg-green-800 cursor-not-allowed'
-                            : 'bg-green-600 hover:bg-green-700 shadow-green-500/50'
-                        }`}
-                >
-                    {isLoading ? (
-                        <>
-                            <Loader2 className="w-6 h-6 animate-spin" />
-                            <span>Processing...</span>
-                        </>
-                    ) : (
-                        <>
-                            <Download className="w-6 h-6" />
-                            <span>Download PPT</span>
-                        </>
-                    )}
-                </button>
-                
-                <button
-                    onClick={handleGenerate}
-                    disabled={isLoading || songs.some(s => !s.title.trim() || !s.lyrics.trim())}
-                    title="Process lyrics and go to the preview screen to edit slides before downloading"
-                    className={`w-full py-4 px-4 rounded-xl text-white font-bold text-lg flex items-center justify-center space-x-2 transition duration-300 transform active:scale-95 shadow-lg 
-                        ${isLoading || songs.some(s => !s.title.trim() || !s.lyrics.trim())
-                            ? 'bg-blue-300 dark:bg-blue-800 cursor-not-allowed'
-                            : 'bg-blue-600 hover:bg-blue-700 shadow-blue-500/50'
-                        }`}
-                >
-                    {isLoading ? (
-                        <>
-                            <Loader2 className="w-6 h-6 animate-spin" />
-                            <span>Processing...</span>
-                        </>
-                    ) : (
-                        <>
-                            <Eye className="w-6 h-6" />
-                            <span>Preview</span>
-                        </>
-                    )}
-                </button>
-            </div>
-        </>
-    );
-
-    const renderPreview = () => {
-        // --- WYSIWYG Font Size Calculation ---
-        const BASE_PREVIEW_FONT_SIZE_PX = 24; // Visual baseline in pixels for the default 54pt size.
-        const TITLE_PPTX_FONT_SIZE = 68; // As defined in downloadPPTX function.
-        
-        const lyricPreviewFontSize = (pptxFontSize / DEFAULT_FONT_SIZE) * BASE_PREVIEW_FONT_SIZE_PX;
-        const titlePreviewFontSize = (TITLE_PPTX_FONT_SIZE / DEFAULT_FONT_SIZE) * BASE_PREVIEW_FONT_SIZE_PX;
-
-        return (
-            <div className="space-y-6">
-                <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white text-center">Presentation Preview</h2> 
-                
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0 relative">
-                    <div className="text-center md:text-left p-2 border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-900/50 rounded-lg w-full md:w-auto">
-                        <p className="text-sm font-semibold text-indigo-700 dark:text-indigo-300">
-                            Font Size: **{pptxFontSize}pt** | Total Slides: **{totalSlideCount}**
-                        </p>
-                        <p className="text-xs text-indigo-600 dark:text-indigo-400 mt-1 flex items-center justify-center md:justify-start">
-                            <HandClick className="w-3 h-3 mr-1"/>
-                            **Click checkbox to select slides. Drag slides to re-order.**
+                    <div className="text-center mb-8">
+                        <Music className={`w-10 h-10 mx-auto text-indigo-600 mb-3`} /> 
+                        <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+                            Worship Presentation Creator
+                        </h1>
+                        <p className="mt-2 text-gray-500 dark:text-gray-400">
+                           Build your setlist, customize the appearance, and download a ready-to-use PowerPoint file.
                         </p>
                     </div>
-
-                    <div className="flex space-x-2 p-1 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-inner border border-gray-200 dark:border-gray-600 ml-auto">
-                        <button onClick={handleUndo} title="Undo last action" disabled={!canUndo} className="p-2 rounded-full text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-150 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"><Undo2 className="w-5 h-5"/></button>
-                        <button onClick={handleRedo} title="Redo last action" disabled={!canRedo} className="p-2 rounded-full text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-150 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"><Redo2 className="w-5 h-5"/></button>
-                        <button onClick={handleZoomOut} title="Zoom Out" disabled={zoomLevel <= 0.5} className="p-2 rounded-full text-indigo-600 dark:text-indigo-400 bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-150 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"><ZoomOut className="w-5 h-5"/></button>
-                        <button onClick={handleResetZoom} title={`Reset Zoom - Current: ${Math.round(zoomLevel * 100)}%`} className="p-2 rounded-full text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-150 shadow-md text-sm font-bold w-12"><span className="text-xs">{Math.round(zoomLevel * 100)}%</span></button>
-                        <button onClick={handleZoomIn} title="Zoom In" disabled={zoomLevel >= 2.0} className="p-2 rounded-full text-indigo-600 dark:text-indigo-400 bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-150 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"><ZoomIn className="w-5 h-5"/></button>
-                    </div>
-                </div>
-
-                <div className="flex justify-center flex-wrap gap-4">
-                    <button onClick={handleEdit} title="Go back to the song list to edit lyrics or add/remove songs" className="py-3 px-6 rounded-xl bg-gray-200 text-gray-800 font-semibold flex items-center space-x-2 hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-100 dark:hover:bg-gray-500 transition duration-150 shadow-md">
-                        <Edit className="w-5 h-5"/>
-                        <span>Edit Song List</span>
-                    </button>
                     
-                    <button onClick={handleSaveProject} title="Save the current state of your slides" disabled={!isDirty || isLoading} className="py-3 px-6 rounded-xl text-white font-bold flex items-center space-x-2 transition duration-150 transform active:scale-95 shadow-md bg-blue-600 hover:bg-blue-700 shadow-blue-500/50 disabled:bg-blue-400 dark:disabled:bg-blue-800 disabled:cursor-not-allowed">
-                       {isLoading ? (<><Loader2 className="w-5 h-5 animate-spin"/><span>Saving...</span></>) : (<><Save className="w-5 h-5"/><span>{isDirty ? 'Save Changes' : 'Project Saved'}</span></>)}
-                    </button>
-                    
-                     <div className="relative" ref={exportDropdownRef}>
-                        <button onClick={() => setIsExportDropdownOpen(p => !p)} disabled={isLoading} title="Download or export the presentation" className={`py-3 px-6 rounded-xl text-white font-bold flex items-center space-x-2 transition duration-150 transform active:scale-95 shadow-md disabled:opacity-50 disabled:cursor-not-allowed ${isLoading ? 'bg-green-300 cursor-wait' : 'bg-green-600 hover:bg-green-700 shadow-green-500/50'}`}>
-                            {isLoading ? (<><Loader2 className="w-5 h-5 animate-spin"/><span>Exporting...</span></>) : (<><FileDown className="w-5 h-5"/><span>Download / Export</span><ChevronDown className={`w-5 h-5 transition-transform ${isExportDropdownOpen ? 'rotate-180' : ''}`} /></>)}
-                        </button>
-                        {isExportDropdownOpen && (
-                             <div className="absolute top-full mt-2 w-full bg-white dark:bg-gray-700 rounded-lg shadow-2xl border border-gray-300 dark:border-gray-600 z-20 overflow-hidden">
-                                <button onClick={handleDownload} className="w-full text-left px-4 py-3 hover:bg-indigo-50 dark:hover:bg-indigo-900/50 text-gray-700 dark:text-gray-200 transition flex items-center space-x-2"><Download className="w-5 h-5 text-green-500"/><span>Download **.pptx**</span></button>
-                                <button onClick={handleExportPDF} className="w-full text-left px-4 py-3 hover:bg-indigo-50 dark:hover:bg-indigo-900/50 text-gray-700 dark:text-gray-200 transition flex items-center space-x-2"><File className="w-5 h-5 text-red-500"/><span>Export as **.pdf**</span></button>
-                                <button onClick={handleExportTXT} className="w-full text-left px-4 py-3 hover:bg-indigo-50 dark:hover:bg-indigo-900/50 text-gray-700 dark:text-gray-200 transition flex items-center space-x-2"><FileText className="w-5 h-5 text-gray-500"/><span>Export as **.txt**</span></button>
-                            </div>
-                        )}
-                    </div>
-                </div>
-                
-                <div className="my-6 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 shadow-sm overflow-hidden">
-                    <button
-                        onClick={() => setIsSettingsExpanded(p => !p)}
-                        className="w-full flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-                        aria-expanded={isSettingsExpanded}
-                        title="Show or hide the global appearance and settings panel"
-                    >
-                        <h3 className="text-xl font-bold text-gray-700 dark:text-gray-200">
-                            Customize Appearance & Settings
-                        </h3>
-                        {isSettingsExpanded ? <ChevronUp className="w-6 h-6 text-gray-500" /> : <ChevronDown className="w-6 h-6 text-gray-500" />}
-                    </button>
-                    {isSettingsExpanded && (
-                        <div className="p-6 border-t border-gray-200 dark:border-gray-700">
-                            <GlobalCustomizationSettings {...customizationProps} />
+                    <div className="mt-8 pt-4">
+                        <div className="flex justify-between items-center mb-4">
+                            <h2 className="text-xl font-bold text-gray-700 dark:text-gray-200">Song List</h2>
+                            <button
+                                onClick={() => setIsLibraryModalOpen(true)}
+                                disabled={isLoading}
+                                title="Add songs from your saved library"
+                                className="py-2 px-4 rounded-lg text-indigo-600 font-bold flex items-center justify-center space-x-2 transition duration-300 transform active:scale-95 shadow-sm border border-indigo-500 hover:bg-indigo-50 dark:text-indigo-400 dark:border-indigo-500 dark:hover:bg-indigo-900/40 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                <BookOpen className="w-5 h-5"/>
+                                <span>Add from Library</span>
+                            </button>
                         </div>
-                    )}
-                </div>
-                
-                <div className="space-y-8 max-h-[70vh] overflow-y-auto p-4 border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-100 dark:bg-gray-900/70" onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
-                    <div style={{ transform: `scale(${zoomLevel})`, transformOrigin: 'top center', transition: 'transform 0.3s ease-in-out', width: `calc(100% / ${zoomLevel})`, paddingBottom: `${100 * (zoomLevel - 1)}px` }}>
-                        {previewSongs && previewSongs.map((song) => (
-                            <div key={song.id} className="mb-8">
-                                <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 border-b border-indigo-300 dark:border-indigo-700 pb-2 mb-4">
-                                    {song.title}
+                        <div className="space-y-8">
+                            {songs.map(renderSongCard)}
+                        </div>
+                        <button
+                            onClick={handleAddSong}
+                            disabled={isLoading}
+                            title="Add a new, empty song card to the list"
+                            className={`mt-6 w-full py-3 px-4 rounded-xl text-indigo-600 font-bold text-lg flex items-center justify-center space-x-2 transition duration-300 transform active:scale-95 shadow-md border-2 border-indigo-600 border-dashed hover:bg-indigo-50 dark:text-indigo-400 dark:border-indigo-500 dark:hover:bg-indigo-900/40
+                                ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:border-indigo-700'}`}
+                        >
+                            <Plus className="w-6 h-6" />
+                            <span>Add Another Song</span>
+                        </button>
+                    </div>
+
+                    <div className="my-8 border-t border-gray-200 dark:border-gray-700 pt-8">
+                        <div className="border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 shadow-sm overflow-hidden">
+                            <button
+                                onClick={() => setIsSettingsExpanded(p => !p)}
+                                className="w-full flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                                aria-expanded={isSettingsExpanded}
+                                title="Show or hide the project and appearance settings panel"
+                            >
+                                <h3 className="text-xl font-bold text-gray-700 dark:text-gray-200">
+                                    Project & Appearance Settings
                                 </h3>
-
-                                <div className="space-y-2">
-                                    {song.chunks && song.chunks.map((chunk, index) => {
-                                        const isSelected = isChunkSelected(song.id, index);
-                                        const isTitleSlide = chunk.type === 'title';
-                                        const uniqueKey = `${song.id}-${index}`;
-                                        const isDragged = draggedItem && draggedItem.songId === song.id && draggedItem.chunkIndex === index;
-                                        const isPartOfDrag = !!draggedItem && isSelected && !isDragged;
-                                        const isDragOverTop = dragOverInfo && dragOverInfo.songId === song.id && dragOverInfo.chunkIndex === index && dragOverInfo.position === 'before';
-                                        const isDragOverBottom = dragOverInfo && dragOverInfo.songId === song.id && dragOverInfo.chunkIndex === index && dragOverInfo.position === 'after';
-
-                                        return (
-                                            <div key={uniqueKey} className="w-full max-w-sm mx-auto relative group">
-                                                <div className={`drop-indicator ${isDragOverTop ? 'visible' : ''}`}></div>
-                                                <div 
-                                                    id={`slide-${uniqueKey}`}
-                                                    onDragOver={(e) => handleDragOver(e, song.id, index)}
-                                                    onDragEnd={handleDragEnd}
-                                                    className={`exportable-slide w-full shadow-xl rounded-lg overflow-hidden border border-gray-300 dark:border-gray-600 relative transition-all duration-200
-                                                        ${isSelected ? 'slide-selected' : ''} ${isDragged ? 'dragging' : ''} ${isPartOfDrag ? 'part-of-drag' : ''}`
-                                                    }
-                                                    style={{ backgroundColor: backgroundColor }}
-                                                >
-                                                    <div
-                                                        className="drag-handle-area"
-                                                        draggable="true"
-                                                        onDragStart={(e) => handleDragStart(e, song.id, index)}
-                                                    >
-                                                        <Menu className="drag-handle-icon w-6 h-6" />
-                                                    </div>
-                                                    <label htmlFor={`select-chunk-${uniqueKey}`} className="absolute top-2 right-2 z-10 p-1 cursor-pointer" title="Select/Deselect this slide for bulk actions">
-                                                        <input id={`select-chunk-${uniqueKey}`} type="checkbox" checked={isSelected} onChange={() => toggleChunkSelection(song.id, index)} className="sr-only peer" disabled={moveMode === 'selecting_target'} />
-                                                        <div className="w-6 h-6 rounded-md border-2 border-white/50 bg-black/20 backdrop-blur-sm flex items-center justify-center transition-all duration-200 peer-checked:bg-indigo-600 peer-checked:border-indigo-500 peer-disabled:cursor-not-allowed peer-disabled:opacity-50">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-white opacity-0 peer-checked:opacity-100 transition-opacity"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                                        </div>
-                                                    </label>
-                                                    
-                                                    <div className="preview-actions">
-                                                        <button onClick={() => handleDuplicateChunk(song.id, index)} title="Duplicate Slide" disabled={moveMode === 'selecting_target'} className="p-2 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-200 transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed"><Copy className="w-4 h-4"/></button>
-                                                        {song.chunks.length > 1 && (
-                                                            <button onClick={() => handleDeleteChunk(song.id, index)} title="Delete Slide" disabled={moveMode === 'selecting_target'} className="p-2 rounded-full bg-red-50 text-red-600 hover:bg-red-200 transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed"><Trash2 className="w-4 h-4"/></button>
-                                                        )}
-                                                    </div>
-                                                    
-                                                    {isTitleSlide && <p className="absolute top-1 left-2 text-xs font-semibold text-gray-400 dark:text-gray-500 opacity-0 group-hover:opacity-100 transition duration-300">TITLE</p>}
-
-                                                    <div className="preview-slide" style={{ backgroundColor: backgroundColor }}>
-                                                        <div 
-                                                            contentEditable="true" 
-                                                            suppressContentEditableWarning={true} 
-                                                            onBlur={(e) => handleChunkEdit(song.id, index, e.currentTarget.textContent)} 
-                                                            className={`preview-slide-editable`} 
-                                                            title="Click to edit the text directly on this slide"
-                                                            style={{ 
-                                                                color: textColor, 
-                                                                fontFamily: isTitleSlide ? 'Arial Black' : fontFamily,
-                                                                fontSize: `${isTitleSlide ? titlePreviewFontSize : lyricPreviewFontSize}px`,
-                                                                lineHeight: 1.2,
-                                                            }}
-                                                        >
-                                                            {chunk.text}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className={`drop-indicator ${isDragOverBottom ? 'visible' : ''}`}></div>
-
-                                                <div className="relative h-6 group w-full max-w-sm mx-auto">
-                                                    <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                                                        <div className="w-full border-t border-dashed border-gray-300 dark:border-gray-600"></div>
-                                                    </div>
-                                                    <div className="relative flex justify-center">
-                                                        <button
-                                                            onClick={() => handleInsertEmptySlide(song.id, index)}
-                                                            title="Insert a new blank slide after this one"
-                                                            className="px-4 py-1.5 text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-white dark:bg-gray-800 rounded-full border border-gray-300 dark:border-gray-600 shadow-sm opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-200 flex items-center space-x-1 hover:bg-indigo-50 dark:hover:bg-indigo-900"
-                                                        >
-                                                            <Plus className="w-4 h-4"/>
-                                                            <span>Add Slide</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
+                                {isSettingsExpanded ? <ChevronUp className="w-6 h-6 text-gray-500" /> : <ChevronDown className="w-6 h-6 text-gray-500" />}
+                            </button>
+                            {isSettingsExpanded && (
+                                <div className="p-6 border-t border-gray-200 dark:border-gray-700">
+                                    <div className="mb-6 space-y-3">
+                                        <h3 className="text-base font-bold text-gray-700 dark:text-gray-200">Project Management</h3>
+                                        <button onClick={handleSaveProject} title="Save the current project to your browser" disabled={isLoading} className="w-full py-2.5 px-4 rounded-lg text-white font-bold flex items-center justify-center space-x-2 transition duration-150 transform active:scale-95 shadow-md bg-blue-600 hover:bg-blue-700 shadow-blue-500/50 disabled:bg-blue-400 dark:disabled:bg-blue-800 disabled:cursor-not-allowed">
+                                        {isLoading ? (<><Loader2 className="w-5 h-5 animate-spin"/><span>Saving...</span></>) : (<><Save className="w-5 h-5"/><span>Save Project</span></>)}
+                                        </button>
+                                        <button
+                                            onClick={handleOpenLoadModal}
+                                            disabled={isLoading}
+                                            title="Load a previously saved project from your browser"
+                                            className="w-full py-2.5 px-4 rounded-lg text-gray-600 font-bold flex items-center justify-center space-x-2 transition duration-300 transform active:scale-95 shadow-sm border border-gray-400 hover:bg-gray-100 dark:text-gray-300 dark:border-gray-500 dark:hover:bg-gray-700/40 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >
+                                            <FolderUp className="w-5 h-5"/>
+                                            <span>Load Project</span>
+                                        </button>
+                                    </div>
+                                    <GlobalCustomizationSettings {...customizationProps} />
                                 </div>
-                            </div>
-                        ))}
+                            )}
+                        </div>
+                    </div>
+                    
+                    <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+                        <button
+                            onClick={handlePreview}
+                            disabled={isLoading || songs.some(s => !s.title.trim() || !s.lyrics.trim())}
+                            title="Preview the final presentation before downloading"
+                            className={`w-full py-4 px-4 rounded-xl text-white font-bold text-lg flex items-center justify-center space-x-2 transition duration-300 transform active:scale-95 shadow-lg 
+                                ${isLoading || songs.some(s => !s.title.trim() || !s.lyrics.trim())
+                                    ? 'bg-indigo-300 dark:bg-indigo-800 cursor-not-allowed'
+                                    : 'bg-indigo-600 hover:bg-indigo-700 shadow-indigo-500/50'
+                                }`}
+                        >
+                           <Eye className="w-6 h-6" />
+                           <span>Preview Presentation</span>
+                        </button>
                     </div>
                 </div>
-                
-                {selectedChunks.length > 0 && (
-                    <div className="fixed bottom-0 left-0 right-0 bg-indigo-800 text-white p-4 shadow-2xl z-30 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4">
-                        <span className="font-semibold text-lg"><span className="bg-white text-indigo-800 py-1 px-2 rounded-md mr-1">{selectedChunks.length}</span> slide(s) selected.</span>
-                        <button onClick={handleDuplicateSelectedChunks} title="Create a copy of the selected slides and insert them after the last selected slide" className="py-2 px-4 rounded-lg font-bold transition duration-150 shadow-lg w-full sm:w-auto bg-white text-indigo-600 hover:bg-indigo-50 hover:scale-[1.02]"><Copy className="w-5 h-5 inline mr-2"/>Duplicate</button>
-                        <button onClick={handleDeleteSelectedChunks} title="Delete the selected slides" className="py-2 px-4 rounded-lg font-bold transition duration-150 shadow-lg w-full sm:w-auto bg-red-600 text-white hover:bg-red-700 hover:scale-[1.02]"><Trash2 className="w-5 h-5 inline mr-2"/>Delete</button>
-                        <button onClick={clearSelection} title="Deselect all slides" className="py-2 px-4 bg-indigo-500 text-white rounded-lg hover:bg-indigo-400 transition duration-150 w-full sm:w-auto"><XCircle className="w-5 h-5 inline mr-2"/>Clear Selection</button>
+            </div>
+
+            <div 
+                aria-live="assertive"
+                className={`fixed bottom-8 right-8 z-50 transition-all duration-500 ease-in-out transform ${feedback ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0 pointer-events-none'}`}
+            >
+                {feedback && (
+                    <div className={`
+                        shadow-2xl rounded-lg flex items-center space-x-4 p-4 max-w-md border-l-4
+                        ${feedback.type === 'success' ? 'bg-white dark:bg-gray-800 border-green-500' : ''}
+                        ${feedback.type === 'error' ? 'bg-white dark:bg-gray-800 border-red-500' : ''}
+                        ${feedback.type === 'info' ? 'bg-white dark:bg-gray-800 border-blue-500' : ''}
+                    `}>
+                        <div className={`flex-shrink-0
+                            ${feedback.type === 'success' ? 'text-green-500' : ''}
+                            ${feedback.type === 'error' ? 'text-red-500' : ''}
+                            ${feedback.type === 'info' ? 'text-blue-500' : ''}
+                        `}>
+                            {feedback.type === 'success' && <CheckCircle className="w-6 h-6" />}
+                            {feedback.type === 'error' && <AlertTriangle className="w-6 h-6" />}
+                            {feedback.type === 'info' && <Info className="w-6 h-6" />}
+                        </div>
+                        <p className="font-bold text-gray-800 dark:text-gray-100 flex-grow">{feedback.message}</p>
+                        <button onClick={() => setFeedback(null)} className="ml-auto p-1 rounded-full text-gray-500 dark:text-gray-400 hover:bg-black/10 dark:hover:bg-white/10 flex-shrink-0">
+                            <span className="sr-only">Close</span>
+                            <XCircle className="w-5 h-5"/>
+                        </button>
                     </div>
                 )}
-            </div>
-        );
-    };
-
-
-    return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col items-center py-10 px-4">
-            <div className="w-full max-w-6xl bg-white dark:bg-gray-800 shadow-2xl rounded-xl p-8 transition-all duration-300">
-                
-                <div className="mb-4 space-y-2">
-                    {error && (
-                        <div className="bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-500/50 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg flex items-center space-x-2">
-                            <XCircle className="w-5 h-5" />
-                            <p className="font-medium">{error}</p>
-                        </div>
-                    )}
-                    
-                    {lastDownloadedFile && (
-                        <div className="bg-green-100 dark:bg-green-900/30 border border-green-400 dark:border-green-500/50 text-green-700 dark:text-green-300 px-4 py-3 rounded-lg flex items-center justify-between space-x-2">
-                            <p className="font-medium">
-                                Success! Presentation **"{lastDownloadedFile}"** is ready.
-                            </p>
-                            <Download className="w-5 h-5" />
-                        </div>
-                    )}
-
-                    {feedback && (
-                        <div className={`
-                            ${feedback.type === 'success' ? 'bg-green-100 dark:bg-green-900/30 border-green-400 dark:border-green-500/50 text-green-700 dark:text-green-300' : ''}
-                            ${feedback.type === 'error' ? 'bg-red-100 dark:bg-red-900/30 border-red-400 dark:border-red-500/50 text-red-700 dark:text-red-300' : ''}
-                            ${feedback.type === 'info' ? 'bg-blue-100 dark:bg-blue-900/30 border-blue-400 dark:border-blue-500/50 text-blue-700 dark:text-blue-300' : ''}
-                            px-4 py-3 rounded-lg flex items-center space-x-2 transition-opacity duration-300
-                        `}>
-                            {feedback.type === 'success' && <CheckCircle className="w-5 h-5" />}
-                            {feedback.type === 'error' && <XCircle className="w-5 h-5" />}
-                            {feedback.type === 'info' && <Info className="w-5 h-5" />}
-                            <p className="font-medium">{feedback.message}</p>
-                        </div>
-                    )}
-                </div>
-                {isInPreviewMode ? renderPreview() : renderForm()}
             </div>
             
             <OverwriteProjectModal 
@@ -2102,6 +1694,13 @@ const App = () => {
                 isOpen={isLibraryModalOpen}
                 onClose={() => setIsLibraryModalOpen(false)}
                 onAddSongs={handleAddSongsFromLibrary}
+            />
+             <LoadProjectModal
+                isOpen={isLoadModalOpen}
+                onClose={() => setIsLoadModalOpen(false)}
+                projects={savedProjects}
+                onLoad={handleLoadProject}
+                onClearAll={handleClearAllProjects}
             />
             <VersionConflictModal
                 isOpen={!!versionConflict}
@@ -2121,7 +1720,15 @@ const App = () => {
                     }
                 }}
             />
-        </div>
+            <FinalPreviewModal
+                isOpen={isPreviewModalOpen}
+                onClose={() => setIsPreviewModalOpen(false)}
+                onConfirmDownload={handleConfirmDownload}
+                slides={slidesForPreview}
+                settings={{...customizationProps, fontSizeInput, lyricVAlign, hasTextShadow}}
+                isLoading={isLoading}
+            />
+        </>
     );
 };
 
